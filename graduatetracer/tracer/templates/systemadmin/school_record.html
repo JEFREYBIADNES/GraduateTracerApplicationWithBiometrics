@@ -1,0 +1,109 @@
+{%  extends 'systemadmin/templates.html' %}
+{% block title %}School Records{% endblock %}
+{% block content %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style media="screen">
+    .none{
+      display:none;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+
+    .dataTables_filter{
+      display: none;
+    }
+
+    .dropdown-filter{
+      top: 33px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+    .th-w-20{
+      width:20% !important;
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+  </style>
+
+<!-- Begin Page Content -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">GINATILAN SCHOOL REPORTS</h6>
+        </div>
+        <div class="card-body">
+            <div class="col-xs-6 col-sm-9 col-md-9 col-lg-3 col-xl-3 p-1">
+              <select id="query0" class="form-control" name="">
+                <option value="">Search Year Graduated</option>
+              {% for query in query_year_graduated %}
+                {% if query %}
+                <option value="{{query}}">{{query}}</option>
+                {% endif %}
+              {% endfor %}
+              </select>
+            </div>
+            <div class="table-responsive">
+                <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="th-w-20" style="white-space: nowrap">School Course</th>
+                            <th class="th-w-20 text-center" style="white-space: nowrap">Number of Graduates</th>
+                            <th class="th-w-20 text-center" style="white-space: nowrap">Number of Employed</th>
+                            <th class="th-w-20 text-center" style="white-space: nowrap">Number of Unemployed</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr>
+
+                          <td class="th-w-20" style="white-space: nowrap">
+                            BSIT
+                          </td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                      </tr>
+                      <tr>
+                          <td class="th-w-20" style="white-space: nowrap">
+                            BIT-CT
+                          </td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                      </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+<!-- /.container-fluid -->
+
+
+
+{% endblock %}

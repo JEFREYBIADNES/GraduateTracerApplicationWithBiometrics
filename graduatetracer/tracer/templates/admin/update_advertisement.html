@@ -1,0 +1,91 @@
+{%  extends 'admin/template.html' %}
+{% block title %}Update Advertise{% endblock %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card shadow mb-4">
+          <div class="card-header h3 bg-c-lite-green text-white pb-3">
+            <div class="card-title h3 row">
+              <div class="col-11 pl-2 pt-1">
+                Update Job
+              </div>
+            </div>
+          </div>
+          <div class="card-body p-2">
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Company Name</h6>
+                {% render_field update_ad.name class="form-control" placeholder="Company Name" name="company_name" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3" data-toggle="tooltip" data-placement="top">
+                <h6 class="text-dark">Job Category</h6>
+                {% render_field update_ad.job_category class="form-control" name="ads_job_category" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Address 1</h6>
+                {% render_field update_ad.address_1 class="form-control" placeholder="Current Address" name="company_address_1" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Address 2</h6>
+                {% render_field update_ad.address_2 class="form-control" placeholder="Permanent Address" name="company_address_2" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">City</h6>
+                  {% render_field update_ad.city class="form-control" placeholder="City" name="company_city" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Phone Number</h6>
+                {% render_field update_ad.phone_number class="form-control" placeholder="Phone Number" name="company_phone_number" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Email Address</h6>
+                {% render_field update_ad.email_address class="form-control" placeholder="Email Address" name="company_email_address" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Personal Website/Link</h6>
+                {% render_field update_ad.personal_website class="form-control" placeholder="Personal Website/Link" name="company_personal_website" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Job Name</h6>
+                {% render_field update_ad.title class="form-control" placeholder="Job Name" name="ads_title" %}
+              </div>
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                <h6 class="text-dark">Salary</h6>
+                {% render_field update_ad.salary class="form-control" placeholder="Salary" name="company_salary" %}
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                <h6 class="text-dark">Job Description</h6>
+                {% render_field update_ad.description class="form-control" cols="70" rows="6" placeholder=update_ad.description.label name="ads_description" %}
+              </div>
+            </div>
+            <div class="mb-2">
+              <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                {% render_field update_ad.image name="image" %}
+              </div>
+
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-lg-6 mt-2">
+                <a href="{% url 'browser' %}" class="btn btn-warning text-white btn-block">
+                    <span class="icon text-white">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                    <span class="text">Cancel</span>
+                </a>
+              </div>
+              <div class="col-lg-6 mt-2">
+                <button  type="submit" class="btn bg-c-lite-green text-white btn-block">
+                    <span class="icon text-white">
+                        <i class="fas fa-check"></i>
+                    </span>
+                    <span class="text">Save Changes</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </form>
+
+{% endblock %}

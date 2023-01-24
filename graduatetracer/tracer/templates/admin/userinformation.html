@@ -1,0 +1,90 @@
+{%  extends 'admin/template.html' %}
+{% block title %}View User Information{% endblock %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<!-- Custom styles for this template-->
+<link href="{% static 'css/user.css' %}" rel="stylesheet">
+
+<div class="page-content page-container" id="page-content">
+  <div class="card user-card-full">
+      <div class="row m-l-0 m-r-0">
+          <div class="col-sm-12 col-md-12 col-lg-4 bg-c-lite-green user-profile">
+            <div class="col-lg-1 mr-auto">
+                <a class="btn bg-gradient-info text-white shadow-lg" href="{% url 'pendingaccounts' %}">Back</a>
+            </div>
+            <div class="card-block text-center text-white">
+                <div class="m-b-25">{% if user_info.profile_picture %}<img  src="{{user_info.profile_picture.url}}" width="120" height="110" class="img-profile rounded-circle shadow-lg" alt="User-Profile-Image">{% endif %}</div>
+                <h6 class="f-w-600">{{ user_info.first_name }} {{ user_info.middle_name }} {{ user_info.last_name }}</h6>
+            </div>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-8">
+              <div class="card-block">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                  <div class="row mb-2">
+                      <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                          <p class="m-b-10 f-w-600">Email</p>
+                          <h6 class="text-muted mby-1 f-w-400">{{ user_info.email }}</h6>
+                      </div>
+                      <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                          <p class="m-b-10 f-w-600">School</p>
+                          <h6 class="text-muted mby-1 f-w-400">{{ user_info.school }}</h6>
+                      </div>
+                      <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                          <p class="m-b-10 f-w-600">Year Graduated</p>
+                          <h6 class="text-muted mby-1 f-w-400">{{ user_info.date_graduated }}</h6>
+                      </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                        <p class="m-b-10 f-w-600">ID Number</p>
+                        <h6 class="text-muted mby-1 f-w-400">{{ user_info.IDNum }}</h6>
+                    </div>
+                    <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                        <p class="m-b-10 f-w-600">Course</p>
+                        <h6 class="text-muted mby-1 f-w-400">{{ user_info.course_type }}</h6>
+                    </div>
+                    <div class="col-xm-12 col-sm-6 col-md-6 col-lg-4">
+                        <p class="m-b-10 f-w-600">Employments Status</p>
+                        {{ user_info.employment_status }}
+                    </div>
+                  </div>
+                  <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Action</h6>
+                  <div class="row">
+                      <div class="col-lg-6 mb-2">
+                          <form method="POST" action="{% url 'approvedUser' user_info.id %}">
+                              {% csrf_token %}
+                              <button class="btn btn-block text-white bg-success active" role="button" aria-pressed="true" type="submit"><i class="fas fa-check"> Approved</i></button>
+                          </form>
+                      </div>
+                      <div class="col-lg-6 mb-2">
+                          <form method="POST" action="{% url 'disapprovedUser' user_info.id %}">
+                              {% csrf_token %}
+                              <button class="btn btn-block text-white bg-danger active" role="button" aria-pressed="true" type="submit"><i class="fas fa-times"> DisApproved</i></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+
+{% endblock %}

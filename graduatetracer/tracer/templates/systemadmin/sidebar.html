@@ -1,0 +1,75 @@
+{% load static %}
+
+<style>
+  .ms-auto {
+    margin-left: 52px!important;
+  }
+  .sidebar .nav-item .collapse .collapse-inner .collapse-item, .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    display: block;
+    color: #3a3b45;
+    text-decoration: none;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+  }
+  .sidebar .nav-item .nav-link i {
+    font-size: 0.85rem;
+    margin-right: 0.25rem;
+}
+</style>
+
+<ul class="bg-gradient-info navbar-nav sidebar sidebar-dark accordion " id="accordionSidebar">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" id="admindash" href="{% url 'admindash' %}">
+        {% if user.profile_picture %}
+          <img class="img-fluid img-profile rounded-circle" src="{{request.user.profile_picture.url}}">
+        {% else %}
+          <img class="img-fluid img-profile rounded-circle" src="{% static 'img/default_profile_2.png'  %}">
+        {% endif %}
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+    {% if request.user.system_admin %}
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="true" aria-controls="collapseone">
+            <i class="fas fa-users"></i>
+            <span>Admin Management</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <div id="collapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+              <a class="collapse-item" id="create_user_management" href="{% url 'create_user_management' %}">Create Account</a>
+              <a class="collapse-item" id="display_user_management" href="{% url 'display_user_management' %}">Display Accounts</a>
+            </div>
+        </div>
+    </li>
+      {% endif %}
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+      <a class="nav-link" id="school_report" href="{% url 'school_report' %}">
+        <i id="school_report_icon" class="fas fa-poll"></i>
+            <span>School Reports</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" id="user_graduates" href="{% url 'user_graduates' %}">
+            <i id="user_graduates_icon" class="fas fa-user"></i>
+            <span>User Graduates</span></a>
+      </a>
+    </li>
+
+    
+</ul>

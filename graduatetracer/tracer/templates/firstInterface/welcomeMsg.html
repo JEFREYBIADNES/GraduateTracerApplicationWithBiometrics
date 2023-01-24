@@ -1,0 +1,69 @@
+{% load static %}
+<html>
+
+<head>
+	<title>CTU Login Page</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	{% include 'firstInterface/css.html' %}
+</head>
+
+<body class="bg-gradient-primary">
+	<style>
+		.login-image {
+			background: url(../images/ct.jpeg);
+			background-position: center;
+			background-repeat: no-repeat;
+			background-size: 320px 320px;
+		}
+	</style>
+
+	<div class="container">
+
+		<!-- Outer Row -->
+		<div class="row justify-content-center">
+
+			<div class="col-xl-10 col-lg-12 col-md-9">
+
+				<div class="card o-hidden border-0 shadow-lg my-5">
+					<div class="card-body p-0">
+						<!-- Nested Row within Card Body -->
+						<div class="row">
+							<div class="col-lg-6 d-none d-lg-block login-image">
+
+							</div>
+							<div class="col-lg-6">
+								<div class="p-3 mt-3">
+									<div class="text-center">
+										<h3 class="text-gray-900 mb-4"><a href="{% url 'register' %}">CEBU TECHNOLOGICAL UNIVERSITY</a></h3>
+									</div>
+                  <h3 class="h5 text-gray-900 mb-4">
+                    Your registration has been received and will be reviewed by the Admin.
+                    This process usually takes 5-10 days,
+                    if you did not received email from us within these days
+                    then you are not registered as our Graduates. :)
+                  </h3>
+
+									<hr>
+									<div class=" text-center input-group mb-2">
+										<a class="btn btn-success btn-user btn-block mt-1"
+											href="{% url 'login' %}">Go Back</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</body>
+
+</html>

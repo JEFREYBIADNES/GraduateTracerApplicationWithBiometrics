@@ -1,0 +1,26 @@
+{% load humanize %}
+{% autoescape off %}
+Job Recommendation System
+
+Hello, {{first_name}} {{middle_name}} {{last_name}}
+
+Your job alert is here!
+
+_____________________________________________________________________________
+
+  Highly recommended!
+
+  Company Name: {{company_name}}
+
+  {{job_title}} | Up to {{job_salary|intcomma}}PHP!
+
+  Address: {{address_1}}
+
+
+  Date Posted: {{job_date_created}}
+
+_____________________________________________________________________________
+
+Recommender System
+
+{% endautoescape %}

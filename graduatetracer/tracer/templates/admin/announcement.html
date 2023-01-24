@@ -1,0 +1,62 @@
+{%  extends 'admin/template.html' %}
+{% block title %}Post Announcement{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+
+    <div class="card shadow mb-4">
+      <div class="card-header  h3 bg-c-lite-green text-white">
+        <div class="card-title">
+          Announcement
+        </div>
+      </div>
+      <div class="card-body p-4">
+        <form method="POST" name="announcement" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-4">
+          <h6 class="text-dark">Announcement Title</h6>
+          {% render_field announcements.title class="form-control" placeholder="Title" name="title" %}
+        </div>
+          <div class="mb-4">
+            <h6 class="text-dark">About of the Announcement</h6>
+            {% render_field announcements.description class="form-control" placeholder="Description" name="description" %}
+          </div>
+          <div class="mb-4">
+            <h6 class="text-dark">Image</h6>
+            {% render_field announcements.image name="image" %}
+          </div>
+          <div class="row justify-content-center ">
+            <div class="col-lg-6">
+              <button type="submit" class="btn bg-c-lite-green text-white btn-block">
+                  <span class="icon text-white">
+                      <i class="fas fa-check"></i>
+                  </span>
+                  <span class="text">Save</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+
+
+
+{% endblock %}

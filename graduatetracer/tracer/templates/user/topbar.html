@@ -1,0 +1,147 @@
+{% load humanize %}
+{% load static %}
+
+<style>
+    .topbar-divider.d-none.d-sm-block {
+        width: 0;
+        border-right: 1px solid #e3e6f0;
+        height: calc(4.375rem - 2rem);
+        margin: auto 1rem;
+    }
+    .header-nav .nav-profile img {
+        max-height: 36px;
+        height: 2rem;
+        width: 2rem;
+        margin-right: 11px;
+    }
+    .badge-counter {
+        position: absolute;
+        transform: scale(0.7);
+        transform-origin: top right;
+        right: 0rem;
+        margin-top: -0.25rem;
+    }
+</style>
+<!-- ======= Header ======= -->
+<div class="d-flex align-items-center justify-content-between">
+    <div class="logo d-flex align-items-center">
+    {% comment %} <img src="{% static 'img/GradTracerLogo.png' %}" alt=""> {% endcomment %}
+    <span class="d-none d-lg-block align-items-center mx-5"> Graduate</span>
+    </div>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+</div><!-- End Logo -->
+
+<nav class="header-nav ml-auto">
+    <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown no-arrow mx-1">
+            <a class="nav-link" href="#" id="alertsDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-lg fas fa-bell fa-fw"></i>
+                {% if user_announcement_notifications_counter != 0 %}
+                  <!-- Counter - Alerts -->
+                  {% if user_announcement_notifications_counter > 3 or user_job_advertise_notifications_counter > 5 %}
+                  <span class="badge badge-danger custom-badge badge-counter">{{user_top_nav_notifications_counter}}+</span>
+                  {% else %}
+                  <span class="badge badge-danger custom-badge badge-counter">{{user_top_nav_notifications_counter}}</span>
+                  {% endif %}
+                {% endif %}
+            </a>
+            <!-- Dropdown - Alerts -->
+            {% if user_top_nav_notifications_counter != 0 %}
+            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header" style="border:0;">
+                    Notification
+                </h6>
+                {% for announcement in top_notif_announcements %}
+
+                  {% if announcement.announcement_notif_counter == False %}
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'display_announcement_notification' announcement.id %}">
+                      <div class="mr-3">
+                          <div class="icon-circle bg-primary">
+                              <i class="fas fa-bullhorn text-white"></i>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="small text-gray-500">{{announcement.date_created|naturaltime}}</div>
+                          <span class="font-weight-bold">{{announcement.title}}</span>
+                      </div>
+                  </a>
+                  {% endif %}
+                {% endfor %}
+                {% for job in top_notif_jobs %}
+                  {% if job.job_advertise_notif_counter == False %}
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'display_job_advertised_notification' job.id %}">
+                      <div class="mr-3">
+                          <div class="icon-circle bg-success">
+                              <i class="fas fa-donate text-white"></i>
+                          </div>
+                      </div>
+                      <div>
+                          <div class="small text-gray-500">{{job.date_created|naturaltime}}</div>
+                          {{job.title}} | Up to {{job.salary}}!
+                      </div>
+                  </a>
+                  {% endif %}
+                {% endfor %}
+                <!-- <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a> -->
+            </div>
+          {% endif %}
+        </li>
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link nav-profile" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.first_name}} {{user.middle_name}} {{user.last_name}}</span>
+                {% if user.profile_picture %}
+                <img class="rounded-circle mr-auto" src="{{request.user.profile_picture.url}}">
+                {% else %}
+                <img class="rounded-circle mr-auto" src="{% static 'img/default_profile_2.png'  %}">
+                {% endif %}
+            </a>
+             <!-- Dropdown - User Information -->
+             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+             aria-labelledby="userDropdown">
+             <div class="dropdown-header">
+                <h6>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h6>
+                <span>{{user.email}}</span>
+              </div>
+              <div class="dropdown-divider"></div>
+             <a class="dropdown-item d-flex align-items-center" href="{% url 'DisplayGradInfo' %}">
+                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                 Profile
+             </a>
+             <div class="dropdown-divider"></div>
+             <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
+                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+             </a>
+         </div>
+
+     </li>
+
+ </ul>
+
+</nav>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0,0,0,0.5);">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">×</span>
+         </button>
+         </div>
+         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+         <div class="modal-footer">
+             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+             <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+         </div>
+     </div>
+ </div>
+</div>
+<!-- End of Topbar -->

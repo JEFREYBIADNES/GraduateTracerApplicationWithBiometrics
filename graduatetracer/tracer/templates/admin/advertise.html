@@ -1,0 +1,238 @@
+{%  extends 'admin/template.html' %}
+{% block title %}Job Advertise{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style media="screen">
+    .none{
+      display:none;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+
+    .dataTables_filter{
+      display: none;
+    }
+
+    .dropdown-filter{
+      top: 33px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .input-group {
+      position: sticky;
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+    .th-w-20{
+      width:20% !important;
+
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+  </style>
+<!-- Modal -->
+<div class="pagetitle">
+  <h1>Advertise Jobs</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'saodashboard' %}">Home</a></li>
+      <li class="breadcrumb-item active">Advertise</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<hr>
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-c-lite-green text-white">
+          <h5 class="modal-title" id="exampleModalLongTitle">Add Job Category</h5>
+          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" name="job_category">
+            {% csrf_token %}
+            <div class="mb-1">
+              {% render_field add_job_categories.title class="form-control" placeholder=add_job_categories.title.label name="job_category_title" %}
+            </div>
+            <div class="mb-1" >
+              {% render_field add_job_categories.description class="form-control" cols="70" rows="7" placeholder=add_job_categories.description.label name="job_category_description" %}
+            </div>
+            <input type="hidden" name="form_type" value="add_job_category_form">
+            <button type="submit" class="btn btn-outline-success btn-block">
+                <span class="icon">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="text">Add</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->
+
+  <div class="card shadow mb-4">
+      <div class="card-header  h3 bg-c-lite-green text-white">
+        <div class="card-title">
+          Advertise Jobs
+        </div>
+      </div>
+      <div class="card-body p-4">
+        <form method="POST" name="advertise" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Company Name</h6>
+              {% render_field ads.name class="form-control" placeholder="Company Name" name="company_name" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Job Category</h6>
+              <div class="input-group">
+                  {% render_field ads.job_category class="form-control" name="ads_job_category" %}
+                  <div class="input-group-append">
+                    <button class="btn bg-c-lite-green text-white" type="button"  data-toggle="modal" data-target="#exampleModalCenter" name="button" style="margin-left: 8px;"><i class="fas fa-plus"></i></button>
+                  </div>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Address 1</h6>
+              {% render_field ads.address_1 class="form-control" placeholder="Current Address" name="company_address_1" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Address 2</h6>
+              {% render_field ads.address_2 class="form-control" placeholder="Permanent Address" name="company_address_2" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">City</h6>
+              {% render_field ads.city class="form-control" placeholder="City" name="company_city" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Phone Number</h6>
+              {% render_field ads.phone_number class="form-control" placeholder="Phone Number" name="company_phone_number" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Email Address</h6>
+              {% render_field ads.email_address class="form-control" placeholder="Email Address" name="company_email_address" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Personal Website/Link</h6>
+              {% render_field ads.personal_website class="form-control" placeholder="Personal Website/Link" name="company_personal_website" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Job Name</h6>
+              {% render_field ads.title class="form-control" placeholder="Job Name" name="ads_title" %}
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+              <h6 class="text-dark">Salary</h6>
+              {% render_field ads.salary class="form-control" placeholder="Salary" name="company_salary" %}
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+              <h6 class="text-dark">Job Description</h6>
+              {% render_field ads.description class="form-control" cols="70" rows="6" placeholder="Job Description" name="ads_description" %}
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+              <h6 class="text-dark">Image</h6>
+              {% render_field ads.image name="image" %}
+            </div>
+          </div>
+          <div class="mb-1">
+            <div class="row">
+              <div class="col-lg-6 mb-1">
+                <input type="hidden" name="form_type" value="ads_form">
+                <button class="btn btn-block text-white bg-c-lite-green" role="button" aria-pressed="true" type="submit">Post Job</button>
+              </div>
+              <div class="col-lg-6 mb-1">
+                <a class="btn btn-block text-white bg-gradient-info" href="{% url 'browser' %}">Browse Jobs</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card shadow mb-4">
+    <div class="card-header bg-c-lite-green text-center text-white">
+      <h2 class="card-title">Job Categories</h2>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="jobs" class="table table-bordered" style="width:100%">
+          <thead class="text-center">
+            <tr>
+              <th class="th-w-20" style="white-space: nowrap" >Title</th>
+              <th class="th-w-20" style="white-space: nowrap">Description</th>
+              <th class="th-w-20" style="white-space: nowrap"colspan="2">Settings</th>
+            </tr>
+          </thead>
+          <tbody class="text-center">
+            {% for job_category in job_categories %}
+            <tr>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{job_category.title}}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{job_category.description}}
+              </td>
+              <td class="text-center">
+                <a href="{% url 'update_job_category' job_category.id %}" class="btn btn-info " type="submit" name="button">
+                  <i class="fas fa-wrench"></i>
+                </a>
+              </td>
+              <td class="text-center">
+                <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{ job_category.id }}">
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+              <div class="modal fade" id="exampleModalCenter{{ job_category.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body text-black">
+                      <h3><span>Are you sure you want to DELETE this Job Category ?</span></h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <a href="{% url 'delete_job_category' job_category.id %}" class="btn btn-danger">Confirm Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+
+
+
+{% endblock %}

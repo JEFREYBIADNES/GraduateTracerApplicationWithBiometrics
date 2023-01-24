@@ -1,0 +1,145 @@
+{%  extends 'systemadmin/templates.html' %}
+{% block title %}User Graduates{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Datatables -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+  <style media="screen">
+    .none{
+      display:none;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+
+    .dropdown-filter{
+      top: 33px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+
+    label {
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .th-w-20{
+      width:20% !important;
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+  </style>
+  <!-- End -->
+<!-- Begin Page Content -->
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3 bg-gradient-info">
+          <h6 class="m-0 font-weight-bold text-white">REGISTERED GRADUATES</h6>
+      </div>
+      <div class="card-body">
+        <table id="jobs" class="display table table-bordered table-responsive w-100">
+            <thead>
+                <tr>
+                  <th class="th-w-20" style="white-space: nowrap">ID Number</th>
+                  <th class="th-w-20" style="white-space: nowrap">Name</th>
+                  <th class="th-w-20" style="white-space: nowrap">Email</th>
+                  <th class="th-w-20" style="white-space: nowrap">School</th>
+                  <th class="th-w-20" style="white-space: nowrap">Employment Status</th>
+                  <th class="th-w-20" style="white-space: nowrap">Course</th>
+                  <th class="th-w-20" style="white-space: nowrap">Date Graduated</th>
+                  <th class="th-w-20" style="white-space: nowrap">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for user_info in user_info %}
+                  {% if user_info.approved %}
+                    <tr>
+                      <td class="th-w-20" style="white-space: nowrap">
+                          {{user_info.IDNum}}
+                      </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                          {{user_info.first_name}} {{user_info.middle_name}} {{user_info.last_name}}
+                        </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                          {{user_info.email}}
+                        </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                          {{user_info.school}}
+                        </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                            {{user_info.employment_status}}
+                        </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                            {{user_info.course_type}}
+                        </td>
+                        <td class="th-w-20" style="white-space: nowrap">
+                          {{user_info.date_graduated}}
+                        </td>
+                        <td class="text-center">
+                          <a class="dropdown-item text-primary p-0" href="{% url 'usergrad_informations' user_info.id %}"><i class="fas fa-eye"></i></a>
+                        </td>
+
+                    </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+
+
+<!-- Datatables -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+<script>
+  $(document).ready(function() {
+    var table = $('#jobs').DataTable( {
+      stateSave: false,
+      "ordering": true,
+      "columnDefs" : [{"targets":3, "type":"date-eu"}],
+      order: [],
+
+    } );
+    $('#query0').on('change', function(){
+       table.columns(0).search(this.value).draw();
+    });
+    $('#query1').on('change', function(){
+       table.columns(4).search(this.value).draw();
+    });
+    $('#query2').on('change', function(){
+       table.columns(5).search(this.value).draw();
+    });
+} );
+</script>
+
+{% endblock %}

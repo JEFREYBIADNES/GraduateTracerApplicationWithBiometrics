@@ -1,0 +1,239 @@
+{% extends 'user/template.html' %}
+{% block title %}Comment Post{% endblock %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-9 mt-1 ">
+    <div class="card shadow mb-4 mt-3 ">
+      <div class="card-body p-2">
+        <a class="btn bg-c-tile text-white shadow-lg" href="{% url 'post-list' %}">Back</a>
+        <div class="text-center">
+          <h4>COMMENT POST</h4>
+        </div>
+      </div>
+    </div>
+    <div class="card shadow mb-4 mt-3 ">
+      <div class="card-body p-2 mt-3">
+        <div class="card-header bg-trasparent border-none" style="background-color: #fff;">
+          <div class="row">
+            <div class="col-11">
+              <div style="white-space: nowrap" class="mr-inherit">
+                <a class="nav-link post">
+                  <img class="img-profile1 rounded-circle" src="{{post.author.profile_picture.url}}" width=" 40" height="40" alt="User-Profile-Image">
+                  <span class="mr-2 d-lg-inline-flex text-gray-700 small post"><strong>{{post.author.first_name}} {{post.author.middle_name}} {{post.author.last_name}}</strong></span>
+              </a>
+                <div class="mt-0 text-dark">
+                  <font class="font1" size="0">{{post.created_on}}</font>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body p-2">
+          {% if post.image %}
+          <div class="row m-auto">
+            <div class="col-lg-6">
+              <p class="card-text">{{post.body}}</p>
+            </div>
+            <div class="col-lg-6 m-auto">
+                <img class="img-fluid img-custom-border p-4" src="{{post.image.url}}" alt="advertisement image">
+            </div>
+          </div>
+          {% else %}
+          <div class="col-lg-12">
+            <p class="card-text">{{post.body}}</p>
+          </div>
+          {% endif %}
+        </div>
+        <div class="card-footer row w-100 m-auto">
+          <div class="col-6 col-lg-4 col-md-4 col-sm-6 text-center">
+              <form method="POST" action="{% url 'like' post.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <!-- <button style="color: #585353;" class="btn default k"> -->
+                <button class="btn default" type="submit">
+                  <i class="fa fa-thumbs-up fa-lg" aria-hidden="true" type="submit">
+                    <span style="font-size: 14px"> {{ post.likes.all.count }} </span>
+                  </i>
+                  Like
+                </button>
+              </form>
+            </div>
+            <div class="col-6 col-lg-4 col-md-4 col-sm-6 text-center">
+              <form method="POST" action="{% url 'dislike' post.pk %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ request.path }}">
+                  <!-- <button style="color: #585353;" class="btn default v"> -->
+                  <button class="btn default" type="submit">
+                    <i class="fa fa-thumbs-down fa-lg" aria-hidden="true" type="submit">
+                      <span style="font-size: 14px"> {{ post.dislikes.all.count }} </span>
+                    </i>
+                    Dislike
+                  </button>
+                  <!-- </button> -->
+                </form>
+              </div>
+              <div class="col-12 col-lg-4 col-md-4 col-sm-12 text-center">
+                <button class="btn btn default">
+                  <i style="font-size: 19px;" aria-hidden="true" class="fa fa-comment">
+                    <span style="font-size: 14px"> {{ comment_count }} </span>
+                  </i>
+                  Comment
+                </button>
+              </div>
+            </div>
+            <div class="card-header bg-trasparent border-none" style="background-color: #fff;">
+              <div class="card-body p-2">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="d-flex flex-row">
+                    {% if user.profile_picture %}
+                      <img class="rounded-circle" src="{{request.user.profile_picture.url}}" width="40" height="40">
+                    {% else %}
+                      <img class="rounded-circle" src="{% static 'img/default_profile_2.png'%}" width="40" height="40">
+                    {% endif %}
+                        {% render_field form.comment class="form-control" cols="200" rows="1" placeholder="Write your comment here..." name="title" %}
+                  </div>
+                  <div class="mt-2 text-right">
+                    <button class="btn bg-c-tile btn-sm shadow-none" type="submit">Post comment</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- <div class="card o-hidden mt-3 border-0 shadow-sm "> -->
+            <div class="card-body p-4">
+              <div class="text-center">
+                <h6>COMMENTS</h6>
+              </div>
+                {% for comment in comments %}
+                <div class="card-body d-flex flex-row align-items-start">
+                  <div style="white-space: nowrap" class="mr-inherit">
+                    <a class="nav-link post">
+                      <img class="img-profile1 rounded-circle" src="{{comment.author.profile_picture.url}}" width=" 40" height="40" alt="User-Profile-Image">
+                      <span class="mr-2 d-lg-inline-flex text-gray-700 small post"><strong>{{comment.author.first_name}} {{comment.author.middle_name}} {{comment.author.last_name}}</strong></span>
+                  </a>
+                  <div class="mt-0 text-dark">
+                      <font class="font1" size="0">{{post.created_on}}</font>
+                  </div>
+                    <div class="card-body">
+                        <p>{{ comment.comment }}</p>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="row justify-content-center  text-content" style="height:100% !important; padding-bottom:none !important;">
+            <ul class="d-none d-lg-inline w-100" style="height:100% !important; text-color:black;" >
+                <div class="body">
+                    <div class="sidnav-brand">
+                        <strong>YOUR FRIENDS</strong>
+                        {% for grad_info in grad_infos %}
+                          {% if grad_info.approved %}
+                            {% if grad_info.email != request.user.email %}
+                              <div class="nav-item active">
+                                  <a class="nav-link">
+                                    <img class="img-profile rounded-circle shadow-sm" data-toggle="modal" data-target="#bd-example-modal-lg1{{grad_info.id}}" src="{{grad_info.profile_picture.url}} " width=" 40" height="40" alt="User-Profile-Image">
+                                      <span class="mr-2 d-lg-inline text-gray-700 small" data-toggle="modal" data-target="#bd-example-modal-lg1{{grad_info.id}}"><strong>{{grad_info.email}}</strong></span>
+                                  </a>
+                              </div>
+                            {% endif %}
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+<!-- basic modal -->
+  {% for grad_info in grad_infos %}
+    <div class="modal fade" id="bd-example-modal-lg1{{grad_info.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form method="POST" action="">
+          {% csrf_token %}
+            <div class="card-header text-black">
+
+              <div class="row">
+                  {% if grad_info.profile_picture %}
+                    <div class="col-lg-2">
+                      <img class="img-profile rounded-circle shadow-sm" src="{{grad_info.profile_picture.url}}" width="70" height="70" alt="User-Profile-Image">
+                    </div>
+                  {% endif %}
+                  <div class="col-lg-10">
+                    <p class="pt-3">{{grad_info.first_name}} {{grad_info.middle_name}} {{grad_info.last_name}}</p>
+                  </div>
+              </div>
+            </div>
+            <div class="card-body">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Email Address: {{grad_info.email}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                      <p>ID Number: {{grad_info.IDNum}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Address: {{grad_info.address}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                      <p>Contact Number: {{grad_info.contactnum}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>School: {{grad_info.school}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                      <p>Course: {{grad_info.course_type}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Employment Status: {{grad_info.employment_status}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                      <p>Year Graduated: {{grad_info.date_graduated}}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <p>Skills: {{grad_info.skill}}</p>
+                    </div>
+                    <div class="col-lg-6">
+                      <p>Job Description: {{grad_info.job_description}}</p>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+  </div>
+{% endfor %}
+</div>
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+{% endblock content %}

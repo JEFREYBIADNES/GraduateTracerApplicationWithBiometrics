@@ -1,0 +1,197 @@
+{%  extends 'user/template.html' %}
+{% block title %}Job Experiences{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Datatables -->
+
+<div class="pagetitle">
+  <h1>My Job Experiences</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'DashboardUser' %}">Home</a></li>
+      <li class="breadcrumb-item active">My Experiences</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<hr>  
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+  <style media="screen">
+    .none{
+      display:none;
+    }
+
+    .text-black{
+      color:black;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+
+    .dropdown-filter{
+      top: 33px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+    .th-w-20{
+      width:20% !important;
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+
+    label{
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      border: none;
+      color: white;
+      padding: 10px px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      }
+
+      .btn2 {
+       background-color: white;
+       color: black;
+       border: 2px solid #e09213;
+      }
+
+      .btn2:hover {
+       background-color: #e79f33;
+       color: white;
+      }
+  </style>
+
+  <!-- Page increment -->
+  <!-- End -->
+
+<div class="card shadow mb-4 pr-4 pl-4 pb-3">
+  <div class="align-self-end ml-auto mt-5">
+     <a href="{% url 'AddJobExperience'%}" class="btn btn2">Add Job Experience </a>
+  </div>
+  <table id="jobs" class="display table table-bordered table-responsive w-100">
+      <thead>
+          <tr>
+            <th class="th-w-20" style="white-space: nowrap">Company Name</th>
+            <th class="th-w-20" style="white-space: nowrap">Address</th>
+            <th class="th-w-20" style="white-space: nowrap">Position</th>
+            <th class="th-w-20" style="white-space: nowrap">Salary</th>
+            <th class="th-w-20" style="white-space: nowrap">Date Started</th>
+            <th class="th-w-20" style="white-space: nowrap">Date Leaved</th>
+            <th class="th-w-20 " style="white-space: nowrap">Option</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for JobExperiences in JobExperience %}
+          <tr>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{JobExperiences.company_name}}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">{{JobExperiences.address}}</td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{JobExperiences.position}}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                  {{JobExperiences.salary}}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{JobExperiences.experienceStartDate}}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {{JobExperiences.experienceEndDate}}
+              </td>
+              <td option-table-wid>
+                <div class="row w-100 m-auto p-0">
+                  <div style="width:50%;" class="text-center">
+                    <a class="dropdown-item text-info p-0" href="{% url 'edit_experience' JobExperiences.id %}"><i class="fas fa-wrench"></i></a>
+                  </div>
+                  <div style="width:50%;" class="text-center pl-0">
+                    <a class="dropdown-item text-danger p-0" data-toggle="modal" data-target="#exampleModalCenter{{ JobExperiences.id }}" ><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                </div>
+              </td>
+              <div class="modal fade" id="exampleModalCenter{{ JobExperiences.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <h3><span>Are you sure you want to DELETE this Experience?</span></h3>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <a href="{% url 'delete_experience' JobExperiences.id %}" class="btn btn-danger">Confirm Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+
+
+
+
+<!-- Datatables -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+<script>
+  $(document).ready(function() {
+    var table = $('#jobs').DataTable( {
+      stateSave: false,
+      "ordering": true,
+      "columnDefs" : [{"targets":3, "type":"date-eu"}],
+      order: [],
+
+    } );
+    $('#query0').on('change', function(){
+       table.columns(1).search(this.value).draw();
+    });
+    $('#query1').on('change', function(){
+       table.columns(2).search(this.value).draw();
+    });
+    $('#query2').on('change', function(){
+       table.columns(3).search(this.value).draw();
+    });
+} );
+</script>
+
+{% endblock %}

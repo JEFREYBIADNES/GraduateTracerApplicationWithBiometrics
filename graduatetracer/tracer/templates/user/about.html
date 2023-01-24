@@ -1,0 +1,85 @@
+{% extends 'user/template.html' %}
+{% block title %}About{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="pagetitle">
+  <h1>About Us</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'DashboardUser' %}">Home</a></li>
+      <li class="breadcrumb-item active">About Us</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<hr>
+    <h2 class="m-3">Why Graduate Tracer</h2>
+<div class="row mt-2 m-4">
+
+  <div class="col-lg-6 col-md-6 mb-md-5  ">
+      <div class="content">
+
+        <h5><i class="fa fa-briefcase"></i> Job Recommendation</h5>
+        <p>  Based on data from Graduate Tracer,
+           such information will now be used by the recommender system to recommend jobs that
+          correspond to what the users prefer.</p>
+      </div>
+  </div>
+  <div class="col-lg-6 col-md-6 mb-md-5">
+      <div class="content">
+          <h5><i class="fa fa-user-graduate"></i> Alumni Tracker</h5>
+        <p>  Assists in tracking graduates' skills, experience, and accomplishments. </p>
+      </div>
+  </div>
+
+  <div class="col-lg-6 cold-md-4 mb-md-5">
+    <div class="content">
+        <h5><i class="fa fa-school"></i> Exclusive For CTU Campuses</h5>
+      <p> Only CTU main,satelites and extension campuses can access this website.</p>
+    </div>
+  </div>
+
+
+  <div class="col-lg-6 cold-md-4 mb-md-5">
+    <div class="content">
+        <h5><i class="fa fa-chart-bar"></i> Reduce Unemployment Graduates</h5>
+      <p> Graduates who are not yet employed can use this website to
+        easily search for jobs that have been recommended by our job recommendation system.</p>
+    </div>
+  </div>
+</div>
+
+<hr>
+  <h3 class="m-3"> Features</h3>
+  <br>
+<div class="card-group">
+
+  <div class="card m-2 p-2">
+    <img class="card-img-top" src="/static/img/viewwork.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h6 class="card-title">View Work History and Experience</h6>
+
+    </div>
+  </div>
+  <div class="card m-2 p-2">
+    <img class="card-img-top" src="/static/img/findjobs.jpg" alt="findjob">
+    <div class="card-body">
+      <h6 class="card-title">Find a Job</h6>
+
+
+    </div>
+  </div>
+
+  <div class="card m-2 p-2">
+    <img class="card-img-top" src="/static/img/friends.jpg" alt="Card image cap">
+    <div class="card-body">
+      <h6 class="card-title">Get in touch with friends</h6>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

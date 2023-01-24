@@ -1,0 +1,75 @@
+{% load static %}
+
+<ul class="bg-c-tile navbar-nav sidebar sidebar-dark accordion " id="accordionSidebar">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'DashboardUser' %}" href="{% url 'DashboardUser' %}">
+        {% if user.profile_picture %}
+          <img class="img-fluid img-profile rounded-circle" src="{{request.user.profile_picture.url}}">
+        {% else %}
+          <img class="img-fluid img-profile rounded-circle" src="{% static 'img/default_profile_2.png'  %}">
+        {% endif %}
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'available_jobs' %}" href="{% url 'available_jobs' %}">
+        <i id="jobs_available_icon" class="fa fa-ad"></i>
+        <span>Jobs available</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'HomeJobExperience' %}" href="{% url 'HomeJobExperience' %}">
+        <i id="job_experience_icon" class="fas fa-user-edit"></i>
+        <span>Job Experiences</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'post-list'%}" href="{% url 'post-list' %}">
+        <i id="news_feed_icon" class="fa fa-comments"></i>
+        <span>News Feeds</span>
+      </a>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'friendlist' %}" href="{% url 'friendlist' %}">
+        <i id="friend_list_icon" class="fas fa-users"></i>
+        <span>Friends</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+      <a class="nav-link" id="{% url 'about' %}" href="{% url 'about' %}">
+        <i id="about_icon" class="fa fa-info-circle"></i>
+        <span>About</span>
+      </a>
+    </li>
+
+
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    
+</ul>

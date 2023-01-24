@@ -1,0 +1,128 @@
+body{
+    margin-top:20px;
+    background:#eee;
+}
+.avatar.avatar-xl {
+    width: 5rem;
+    height: 5rem;
+}
+.avatar {
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+    border-radius: 50%;
+    display: inline-block;
+    background: #ced4da no-repeat center/cover;
+    position: relative;
+    text-align: center;
+    color: #868e96;
+    font-weight: 600;
+    vertical-align: bottom;
+}
+.card {
+    margin-top: 60px;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: max-content;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1pxsolidrgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+.card {
+    margin-bottom: 30px;
+    -webkit-box-shadow: 2px 2px 2px rgba(0,0,0,0.1), -1px 0 2px rgba(0,0,0,0.05);
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.1), -1px 0 2px rgba(0,0,0,0.05);
+}
+.card-body {
+    padding: 1.25rem;
+}
+.tile-link {
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 30;
+    min-width: max-content;
+}
+.img-profile1.rounded-circle {
+    margin-left: -8px;
+    margin-top: 8px;
+}
+.img-profile2.rounded-circle {
+    margin-left: -8px;
+    margin-top: -2px;
+}
+
+img.post-image {
+    vertical-align: middle;
+    border-style: none;
+    max-width: 100%;
+}
+
+a#\/graduate\/display-info\/ {
+    margin-top: -23px;
+}
+.mt-0.text-dark {
+    margin-top: -22px!important;
+    opacity: 1.5;
+}
+
+.ml-inherit {
+    margin-left: auto!important;
+    margin-top: -10px;
+}
+
+/* i.fas.fa-ellipsis-v.text-black{
+  padding-left: 36px!important;
+} */
+
+a.nav-link.post{
+  margin-top: -26px!important;
+}
+
+.font1 {
+    margin-left: 37px;
+    font-size: 11px;
+}
+
+span.mr-2.d-lg-inline-flex.text-gray-700.small.post {
+    margin-right: -0.5rem!important;
+}
+
+.default:hover {
+  background: #eee;
+}
+.mr-2 .d-none .d-lg-inline .text-gray-700 .small {
+  margin-top: 20px;
+}
+a.btn.btn-light {
+    margin-top: 35px;
+}
+a.fas.fa-ellipsis-v.text-black{
+  margin-left: auto!important;
+  display: inline-block;
+}
+.card-footer.row.w-100.m-auto {
+    margin-bottom: -8px!important;
+}
+.fa-thumbs-up:hover {
+    color: #005dff;
+}
+.fa-thumbs-down:hover {
+    color: #af1100;
+}
+.fa.fa-comment:hover{
+  color: #f77d2c;
+}
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+/* 3 dots dropdown css */

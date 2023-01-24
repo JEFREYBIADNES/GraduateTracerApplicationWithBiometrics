@@ -1,0 +1,144 @@
+{% extends 'user/template.html'%}
+{% block title %}Display Users' Information{% endblock %}
+{% load static %}
+{% block content %}
+<link href="{% static 'css/Display.css' %}" rel="stylesheet">
+
+  <style>
+    .btn {
+      border: none;
+      color: white;
+      padding: 10px px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      }
+
+      .btn2 {
+       background-color: white;
+       color: black;
+       border: 2px solid #e09213;
+      }
+
+      .btn2:hover {
+       background-color: #e79f33;
+       color: white;
+      }
+
+      i.fas.fa-wrench {
+        padding: 5px;
+    }
+  </style>
+  <div class="text-center pt-3">
+    <h3>My Profile</h3>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{user.profile_picture.url}}" alt="avatar"
+              class="rounded-circle img-fluid" style="width: 150px; height: 150px;">
+              <div class="profile-name"><h4>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h4></div>
+            <p class="text-muted mb-1">{{user.email}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <a href="{% url 'UpdateGradInfo' user.id %}" type="button" class="btn btn2"><i class="fas fa-wrench"></i>Edit Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <form method="POST" action="{% url 'DisplayGradInfo' %}">
+            {% csrf_token %}
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Email</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.email }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">ID Number</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.IDNum }}</h6>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">School </p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.school }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Year Graduated</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.date_graduated }}</h6>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Course</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.course_type }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Status</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.employment_status }}</h6>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Age</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.age }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Gender</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.gender }}</h6>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Phone</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.contact_number }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Address</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.address }}</h6>
+                </div>
+              </div>
+              <hr>
+              <div class="row mb-2">
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Job Description</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.job_description }}</h6>
+                </div>
+                <div class="col-xm-12 col-sm-6 col-md-6 col-lg-6">
+                    <p class="m-b-10 f-w-600">Skill</p>
+                    <h6 class="text-muted mby-1 f-w-400">{{ user.skill }}</h6>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+    {% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'user/template.html'%}
+{% block title %}Edit Experiences{% endblock %}
+{% load static %}
+{% block content %}
+  <div class="card shadow mb-4">
+    <div class="card-header py-3 bg-c-tile">
+        <h3 class="m-0 font-weight-bold text-white">EDIT JOB EXPERIENCES</h3>
+    </div>
+    <div class="card-body">
+      <form action = "{% url 'edit_experience' JobExperiences.id %}" method = "post">
+        {% comment %} {% include 'tracer/user/JobExperience/_messages.html' %} {% endcomment %}
+        {% csrf_token %}
+
+
+      <div class="form-group">
+        <label for="">Company Name</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          name="company_name"
+          value="{{values.company_name}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="">Address</label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          name="address"
+          value="{{values.address}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for=""> Position </label>
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          name="position"
+          value="{{values.position}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="">Salary</label>
+        <input
+          type="number"
+          class="form-control form-control-sm"
+          name="salary"
+          value="{{values.salary}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="">Date Started</label>
+        <input
+          type="date"
+          class="form-control form-control-sm"
+          placeholder="mm-dd-yyyy"
+          selected name="experienceStartDate"
+          value="{{values.experienceStartDate|date:'Y-m-d'}}"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="">Date Leaved</label>
+        <input
+          type="date"
+          class="form-control form-control-sm"
+          placeholder="mm-dd-yyyy"
+          name="experienceEndDate"
+          value="{{values.experienceEndDate|date:'Y-m-d'}}"
+          required
+        />
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-6 mt-2">
+          <a href="{% url 'HomeJobExperience' %}" class="btn bg-c-tile text-white btn-block">
+              <span class="icon text-white">
+                  <i class="fas fa-exclamation-triangle"></i>
+              </span>
+              <span class="text">Cancel</span>
+          </a>
+        </div>
+        <div class="col-lg-6 mt-2">
+          <button  type="submit" class="btn bg-gradient-info text-white btn-block">
+              <span class="icon text-white">
+                  <i class="fas fa-check"></i>
+              </span>
+              <span class="text">Save Changes</span>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'user/template.html'%}
+{% block title %}Graduates{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-6 mb-4">
+    <div class="card shadow">
+        <div class="card-header bg-c-lite-green text-white">
+          <div class="row">
+              {% if users_info.profile_picture %}
+                <div class="col-lg-2">
+                  <img class="img-profile rounded-circle shadow-sm" src="{{user_info.profile_picture.url}}" width=" 50" height="50" alt="User-Profile-Image">
+                </div>
+              {% endif %}
+              <div class="col-lg-10">
+                <p class="pt-3">{{request.user.first_name}} {{request.user.middle_name}} {{request.user.last_name}}</p>
+              </div>
+
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <p>Email Address: {{request.user.email}}</p>
+            </div>
+          </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Address: {{request.user.address}}</p>
+              </div>
+              <div class="col-lg-6">
+                <p>Contact Number: {{request.user.contactnum}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Birth Date: {{request.user.bdate}}</p>
+              </div>
+              <div class="col-lg-6">
+                <p>Age: {{request.user.age}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Gender: {{request.user.gender}}</p>
+              </div>
+              <div class="col-lg-6">
+                <p>Year Graduated: {{request.user.year_graduated}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6">
+                <p>Skills: {{request.user.skill}}</p>
+              </div>
+              <div class="col-lg-6">
+                <p>Job Description: {{request.user.job_description}}</p>
+              </div>
+
+            </div>
+        </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

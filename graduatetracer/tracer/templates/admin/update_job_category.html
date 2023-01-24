@@ -1,0 +1,46 @@
+{%  extends 'admin/template.html' %}
+{% block title %}Update Job Category{% endblock %}
+{% load widget_tweaks %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="card shadow mb-4">
+        <div class="card-header  h3 bg-c-lite-green text-white">
+          <div class="card-title">
+            Update Job Category
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="mb-4">
+            <h6 class="text-dark">Title</h6>
+            {% render_field update_job_category.title class="form-control" placeholder="Title" name="title" %}
+          </div>
+            <div class="mb-4">
+              <h6 class="text-dark">Description</h6>
+              {% render_field update_job_category.description class="form-control" placeholder="Description" name="description" %}
+            </div>
+          <div class="row">
+            <div class="col-lg-6 mt-2">
+              <a href="{% url 'advertise' %}" class="btn btn-warning text-white btn-block">
+                  <span class="icon text-white">
+                      <i class="fas fa-exclamation-triangle"></i>
+                  </span>
+                  <span class="text">Cancel</span>
+              </a>
+            </div>
+            <div class="col-lg-6 mt-2">
+              <button type="submit" class="btn bg-c-lite-green text-white btn-block">
+                  <span class="icon text-white">
+                      <i class="fas fa-check"></i>
+                  </span>
+                  <span class="text">Save Changes</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </form>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{%  extends 'admin/template.html' %}
+{% block title %}View Job Advertise{% endblock %}
+{% load humanize %}
+
+{% block content %}
+<div class="container pb-3">
+  <div class="text-right pb-3">
+
+  </div>
+  <div class="card">
+    <div class="card-header bg-c-lite-green text-white pb-3">
+      <div class="card-title h1 row pb-1">
+        <div class="col-10 h2 pl-2 pt-1">
+          {{ad.name}}{% if ad.job_category %} - {{ad.job_category}}{% endif %}
+        </div>
+        <div class="col-2 text-left pr-2 pt-1">
+          <a class="text-white btn btn-outline-warning text-white shadow-lg" href="{% url 'browser' %}"><i class="fas fa-arrow-left link"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <span class="col-6 text-left p text-gray-200">{{ad.address_1}}, {% if ad.address_2 %}{{ ad.address_2 }}, {% endif %}{{ ad.city }}</span>
+        <span class="col-6 text-right p text-gray-200">Contact us: +63{{ad.phone_number}} / {{ad.email_address}}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-title">
+        <div class="mb-4">
+          <span class="h4 font-weight-bold"><u>{{ad.title}} | Up to PHP{{ad.salary|intcomma}}</u></span>
+        </div>
+        <!-- <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+          <span class="h5"><span class="font-weight-bold">Salary: </span>{{ad.salary}}</span>
+        </div> -->
+      </div>
+
+        {% if ad.image %}
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 mb-2">
+            <div class="">
+              <div class="h5 font-weight-bold mb-1">
+                Description
+              </div>
+              <p>{{ad.description}}</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6 mb-2">
+            <div class="text-center">
+              <img class="img-fluid img-custom-border p-4" src="{{ad.image.url}}" alt="advertisement image">
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="pt-2 pl-2">
+          <div class="h5 font-weight-bold mb-1">
+            Description
+          </div>
+          <p>{{ad.description}}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% if ad.personal_website%}
+    <div class="card-footer bg-white">
+      <div class="card-title text-center ">
+        <span>For more information and inquiries please visit our website</span>
+          <cite class="blockquote-footer"><a href="{{ad.personal_website}}">{{ad.personal_website}}</a>
+          </cite>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% load static %}
+
+<style>
+  .ms-auto1 {
+    margin-left: 93px!important;
+  }
+  .ms-auto {
+    margin-left: 52px!important;
+  }
+  .sidebar .nav-item .collapse .collapse-inner .collapse-item, .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    display: block;
+    color: #3a3b45;
+    text-decoration: none;
+    border-radius: 0.35rem;
+    white-space: nowrap;
+  }
+  .sidebar .nav-item .nav-link i {
+    font-size: 0.85rem;
+    margin-right: 0.25rem;
+}
+</style>
+
+<ul class="bg-c-lite-green navbar-nav sidebar sidebar-dark accordion " id="accordionSidebar">
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" id="DashboardAdmin" href="{% url 'saodashboard' %}">
+        {% if user.profile_picture %}
+          <img class="img-fluid img-profile rounded-circle" src="{{request.user.profile_picture.url}}">
+        {% else %}
+          <img class="img-fluid img-profile rounded-circle" src="{% static 'img/default_profile_2.png'  %}">
+        {% endif %}
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+
+    <li class="nav-item">
+        <a class="nav-link" id="{% url 'advertise' %}" href="{% url 'advertise' %}">
+            <i id="advertise_icon" class="fas fa-ad"></i>
+            <span>Advertise</span>
+          </a>
+      </li>
+  
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+      
+      <!-- Nav Item - Charts -->
+      <li class="nav-item">
+        <a class="nav-link" id="{% url 'browser' %}" href="{% url 'browser' %}">
+            <i id="browser_icon" class="fas fa-search"></i>
+            <span>Browse</span>
+          </a>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+     
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseone" aria-expanded="true" aria-controls="collapseone">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Graduates</span><i class="bi bi-chevron-down ms-auto1"></i>
+          </a>
+          <div id="collapseone" class="collapse" aria-labelledby="headingone" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" id="{% url 'pendingaccounts' %}" href="{% url 'pendingaccounts' %}">Pending</a>
+              <a class="collapse-item" id="{% url 'approvedaccounts' %}" href="{% url 'approvedaccounts' %}">Approved</a>
+              </div>
+          </div>
+      </li>
+
+      <hr class="sidebar-divider">
+      
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-bullhorn"></i>
+            <span>Announcements</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" id="{% url 'add_announcements' %}" href="{% url 'add_announcements' %}">Post</a>
+                <a class="collapse-item" id="{% url 'display_announcements' %}" href="{% url 'display_announcements' %}">Display</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
+    <!-- Nav Item - Charts -->
+    <li class="nav-item">
+        <a class="nav-link" id="{% url 'users' %}" href="{% url 'users' %}">
+            <i id="users_icon" class="fas fa-users"></i>
+            <span>User Graduates</span></a>
+    </li>
+
+    
+</ul>

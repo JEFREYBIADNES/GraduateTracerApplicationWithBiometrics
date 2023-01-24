@@ -1,0 +1,219 @@
+{%  extends 'systemadmin/templates.html' %}
+{% block title %}Display Admin Management{% endblock %}
+{% block content %}
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style media="screen">
+    .none{
+      display:none;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+
+    .dataTables_filter{
+      display: none;
+    }
+
+    .dropdown-filter{
+      top: 33px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+    .th-w-20{
+      width:20% !important;
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+  </style>
+
+<!-- Begin Page Content -->
+{% comment %} <div class="container"> {% endcomment %}
+    <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">ADMIN SAO ACCOUNTS</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="th-w-20" style="white-space: nowrap">Name</th>
+                  <th class="th-w-20" style="white-space: nowrap">Email</th>
+                  <th class="th-w-20" style="white-space: nowrap">School</th>
+                </tr>
+              </thead>
+              <tbody>
+                 {% for ad in ad_info %}
+                  {% if ad.admin_sao %}
+                    <tr>
+                      <td class="th-w-20" style="white-space: nowrap">{{ad.first_name}} {{ad.middle_name}} {{ad.last_name}}</td>
+                      <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                      <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                    </tr>
+                  {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+           </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">SYSTEM ADMIN ACCOUNTS</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="th-w-20" style="white-space: nowrap">Name</th>
+                            <th class="th-w-20" style="white-space: nowrap">Email</th>
+                            <th class="th-w-20" style="white-space: nowrap">School</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for ad in ad_info %}
+                        {% if ad.system_admin %}
+                          <tr>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.first_name}} {{ad.middle_name}} {{ad.last_name}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          </tr>
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">ADMIN DEAN ACCOUNTS</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="th-w-20" style="white-space: nowrap">Name</th>
+                            <th class="th-w-20" style="white-space: nowrap">Email</th>
+                            <th class="th-w-20" style="white-space: nowrap">School</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for ad in ad_info %}
+                        {% if ad.dean %}
+                          <tr>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.first_name}} {{ad.middle_name}} {{ad.last_name}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          </tr>
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">ADMIN CAMPUS DIRECTOR ACCOUNTS</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="th-w-20" style="white-space: nowrap">Name</th>
+                            <th class="th-w-20" style="white-space: nowrap">Email</th>
+                            <th class="th-w-20" style="white-space: nowrap">School</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for ad in ad_info %}
+                        {% if ad.campus_director %}
+                          <tr>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.first_name}} {{ad.middle_name}} {{ad.last_name}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          </tr>
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-gradient-info">
+            <h6 class="m-0 font-weight-bold text-white">ADMIN UNIVERSITY PRESIDENT ACCOUNTS</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="datatables" class="table table-striped table-bordered" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th class="th-w-20" style="white-space: nowrap">Name</th>
+                            <th class="th-w-20" style="white-space: nowrap">Email</th>
+                            <th class="th-w-20" style="white-space: nowrap">School</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for ad in ad_info %}
+                        {% if ad.university_pres %}
+                          <tr>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.first_name}} {{ad.middle_name}} {{ad.last_name}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.email}}</td>
+                              <td class="th-w-20" style="white-space: nowrap">{{ad.school}}</td>
+                          </tr>
+                        {% endif %}
+                      {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+  {% comment %} </div> {% endcomment %}
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{%  extends 'user/template.html' %}
+{% block title %}User Dashboard{% endblock %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'DashboardUser' %}">Home</a></li>
+        <li class="breadcrumb-item active">Announcements</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <hr>
+  {% for announcement in announcements %}
+    <div class="card shadow mb-4">
+      <div class="card-header pl-3 pr-4 pb-0 m-0 bg-c-tile1 text-white">
+        <div class="card-title">
+          <div class="row">
+            <div class="col-10">
+              <div class="mr-auto">
+                <div class="h4">
+                  {{announcement.title}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        {% if announcement.image %}
+        <div class="row m-auto">
+          <div class="col-lg-6">
+            <h6 class="card-title pb-1">{{announcement.date_created}}</h6>
+            <p class="card-text">{{announcement.description}}</p>
+          </div>
+          <div class="col-lg-6 m-auto">
+              <img class="img-fluid img-custom-border p-4" src="{{announcement.image.url}}" alt="advertisement image">
+          </div>
+        </div>
+        {% else %}
+        <div class="col-lg-12">
+          <h6 class="card-subtitle pb-1">{{announcement.date_created}}</h6>
+          <p class="card-text">{{announcement.description}}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+  {% endfor %}
+
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    {% for message in messages %}
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: '{{message}}',
+      showConfirmButton: false,
+      timer: 3000
+    })
+    {% endfor %}
+  </script>
+{% endblock %}

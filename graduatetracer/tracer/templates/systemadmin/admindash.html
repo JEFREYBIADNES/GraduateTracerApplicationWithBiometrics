@@ -1,0 +1,208 @@
+{%  extends 'systemadmin/templates.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+  <div class="pagetitle">
+    <h1>Dashboard</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'admindash' %}">Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <hr>
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow-sm h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-2">
+                                User Type</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">ADMIN {{request.user.user_type}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow-sm h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-2">
+                                Users</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{count_approved}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-users fa-2x text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- Percentage of Employed Users -->
+          <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-info shadow-sm h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-2">
+                                School</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{request.user.school}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa fa-school fa-2x text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lx-6 col-lg-6">
+          <!-- Analytics -->
+          <div class="card shadow-sm mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+
+                  <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-fw fa-chart-area mr-2"></i>Registered Graduates: {{count_approved}}</h6>
+              </div>
+              <div class="card-body">
+                  <canvas id="analyticsChart" style="width:100%;max-width:600px"></canvas>
+                  <script>
+                  var xValues = ["Employed","Unemployed"];
+                  var yValues = [{{count_employed}},{{count_unemployed}}];
+
+                  var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                  new Chart("analyticsChart", {
+                    type: "bar",
+                    data: {
+                    labels: xValues,
+                    datasets: [{
+                      backgroundColor: barColors,
+                      data: yValues
+                    }]
+                  },
+                  options: {
+                    legend: {display: false},
+                    title: {
+                      display: true,
+                      text: "Analytics"
+                    },
+                    scales: {
+                      yAxes: [{
+                        ticks: {
+                          beginAtZero: true
+                        },
+                          maxBarThickness: 25,}]
+                      }
+                  }
+                  });
+                  </script>
+              </div>
+          </div>
+
+          <!-- About Recommender System -->
+          <div class="card shadow-sm mb-4">
+              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-secondary">
+                  <h6 class="m-0 font-weight-bold text-white"><i class="mr-2 fas fa-question-circle"></i>Guide</h6>
+              </div>
+              <div class="card-body">
+                <p>Can view analytics like the numbers of Registered Graduates, How many are employed and unemployed.</p>
+                {% if request.user.system_admin %}
+                <p>System Admin can create Student Administrative Officers:  DEAN, System Admin, Campus Director and University President.</p>
+                {% endif %}
+                <p>Can view Registered Graduates' Information  and thier Work Experiences.</p>
+                <p>Has a total number of employed and unemployed CTU graduates.</p>
+              </div>
+          </div>
+
+
+        </div>
+
+            <!-- Voting System -->
+            <div class="col-lx-6 col-lg-6">
+              <div class="card shadow-sm mb-4">
+
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-info">
+                      <h6 class="m-0 font-weight-bold text-white"><i class="mr-2 fas fa-info-circle"></i>About</h6>
+                  </div>
+
+                  <div class="card-body">
+                      <div class="text-center">
+                          <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
+                              src="{% static 'img/visualizer.svg'  %}" alt="Dashboard-Visualizer">
+                      </div>
+                      {% if request.user.system_admin %}
+                      <p>Sytem Admin is one of the users who creates student administrative officers,
+                         can view all of the users who have registered for this application,
+                          and can also view all of the graduates' basic profiles and work histories,
+                         as well as calculate all of the population on their respective campuses.
+                       </p>
+                      {% endif %}
+
+                      {% if request.user.dean %}
+                      <p>The Admin Dean is in charge of the School's academic vision and reports to the Vice President for Academic Affairs.
+                         The Dean, as the School's chief academic officer,
+                         provides intellectual leadership for all academic departments and multidisciplinary programs,
+                         as well as their faculty and staff and budgets.
+                         The Dean is one of the users who can view all of the users who have registered for this application,
+                         and can also view all of the graduates' basic profiles.
+                       </p>
+                      {% endif %}
+
+                      {% if request.user.campus_director %}
+                      <p>The campus director is managed, organized, directed, and evaluated by the campus director.
+                          The Campus Director creates and administers the programming and curriculum
+                          for the campus programs while also providing instructional leadership.
+                          The Campus Director is one of the users who can view all of the users who have registered for this application,
+                          and can also view all of the graduates' basic profiles.
+                       </p>
+                      {% endif %}
+
+                      {% if request.user.university_pres %}
+                      <p>Student activities and extracurricular opportunities are organized by the University President.
+                         Administers the school's disciplinary policies and conduct standards.
+                         Oversees the school's support systems, such as counseling and academic assistance.
+                         The University President is one of the users who can view all of the users who have registered for this application,
+                         and can also view all of the graduates' basic profiles.
+                       </p>
+                      {% endif %}
+
+                  </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+
+          <script src="{% static '/js/profile.js' %}"></script>
+          <!-- Sweet Alert -->
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+          <script>
+            {% for message in messages %}
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: '{{message}}',
+              showConfirmButton: false,
+              timer: 3000
+            })
+            {% endfor %}
+          </script>
+
+
+
+
+{% endblock %}

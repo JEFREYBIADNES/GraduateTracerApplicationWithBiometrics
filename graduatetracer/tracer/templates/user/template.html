@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="icon" href="{% static 'img/ctu_logo.png' %}" type="image/gif" sizes="16x16">
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet"> 
+
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <linkhref="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"rel="stylesheet">
+  
+  <!-- Chatbot Css -->
+  <link href="{% static 'css/chatbot.css' %}" rel="stylesheet">
+
+  <link href="{% static 'css/friendlistCss.css' %}" rel="stylesheet">
+
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+
+
+</head>
+
+<body id="page-top" onload="side_bar_active()">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    {% include 'user/topbar.html' %}
+    <!-- End of Modal -->
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <div class="sidebar">
+    {% include 'user/sidebar.html' %}
+  </div>
+  <!-- End Sidebar-->
+
+  <main id="main" class="main">
+    <div id="wrapper">
+      <div id="content">
+        <section class="section dashboard">
+          <div class="container-fluid">
+            {% block content %}
+
+            {% endblock %}
+            {% include 'user/chatbot.html' %}
+          </div>
+        </section>
+      </div>
+  </main><!-- End #main -->
+  
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+
+  <script src="{% static 'js/chatbot.js' %}"></script>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Datatables -->
+  <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+
+
+  <script>
+    function side_bar_active(){
+      current_url = window.location.href;
+      dashboard = document.getElementById("{% url 'DashboardUser' %}");
+      jobs_available = document.getElementById("{% url 'available_jobs' %}");
+      job_experience = document.getElementById("{% url 'HomeJobExperience' %}");
+      news_feed = document.getElementById("{% url 'post-list' %}");
+      friends_list = document.getElementById("{% url 'friendlist' %}");
+      friend_list_icon = document.getElementById("friend_list_icon");
+      about = document.getElementById("{% url 'about' %}");
+
+        if (current_url == dashboard){
+          dashboard.style.background = "black";
+          dashboard.style.color = "white";
+        }else if (current_url == jobs_available){
+          jobs_available.style.background = "black";
+          jobs_available.style.color = "white";
+          jobs_available_icon.style.color = "white";
+        }else if (current_url == job_experience){
+          job_experience.style.background = "black";
+          job_experience.style.color = "white";
+          job_experience_icon.style.color = "white";
+        }else if (current_url == news_feed){
+          news_feed.style.background = "black";
+          news_feed.style.color = "white";
+          news_feed_icon.style.color = "white";
+        }else if (current_url == friends_list){
+          friends_list.style.background = "black";
+          friends_list.style.color = "white";
+          friend_list_icon.style.color = "white";
+        }else if (current_url == about){
+          about.style.background = "black";
+          about.style.color = "white";
+          about_icon.style.color = "white";
+        }
+    }
+
+  </script>
+
+</body>
+
+</html>

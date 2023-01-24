@@ -1,0 +1,433 @@
+{% extends 'user/template.html' %}
+{% block title %}Jobs Available{% endblock %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+<!-- Datatables -->
+
+ <div class="pagetitle">
+    <h1>Jobs Available</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'DashboardUser' %}">Home</a></li>
+        <li class="breadcrumb-item active">Jobs Available</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+  <hr>  
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.4/css/jquery.dataTables.css">
+
+
+  <style media="screen">
+    .none{
+      display:none;
+    }
+
+    .text-black{
+      color:black;
+    }
+
+    .dataTables_wrapper{
+      z-index: 0;
+    }
+    .dataTables_length{
+      z-index: 2;
+    }
+    .dropdown-filter {
+      top: 15px !important;
+      position: relative;
+      z-index: 1;
+    }
+
+    .leftcolumn {
+      float: left;
+      width: 75%;
+    }
+    
+    /* Right column */
+    .rightcolumn {
+      float: left;
+      width: 25%;
+      padding-left: 20px;
+    }
+    
+    @media screen and (max-width: 800px) {
+      .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    .dataTables_length{
+      padding-bottom: 10px;
+    }
+    .th-w-20{
+      width:20% !important;
+    }
+    .th-w-10{
+      width:10% !important;
+    }
+
+    label{
+      display: inline-block;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+    }
+
+  a {
+    color: var(--bs-link-color);
+    text-decoration: auto;
+  }
+  </style>
+
+  <!-- Page increment -->
+  <script>
+    function show(shown, hidden) {
+
+      document.getElementById(shown).style.display='block';
+      document.getElementById(hidden).style.display='none';
+      return false;
+    }
+  </script>
+  <!-- End -->
+
+<div class="row">
+  <div class="col-sm-auto col-md-auto col-lg-auto col-xl-auto m-auto mb-3">
+    <a href="#" class="btn bg-c-tile text-white shadow-lg" onclick="return show('Page1','Page2');"><h6>Tile View</h6></a>
+  </div>
+  <div class="col-sm-auto col-md-auto col-lg-auto col-xl-auto m-auto mb-3">
+    <a href="#" class="btn bg-c-tile text-white shadow-lg" onclick="return show('Page2','Page1');"><h6>List View</h6></a>
+  </div>
+</div>
+
+<div id="Page2" class="card shadow mb-4 bg-white mb-4 pr-4 pl-4 pb-3" style="display:none;">
+  <div class="row-100">
+    <div class="row w-20">
+    </div>
+    <div class="row w-80 justify-content-end dropdown-filter">
+      <div class="col-xs-6 col-sm-9 col-md-9 col-lg-3 col-xl-3 p-1">
+        <select id="query0" class="form-control" name="">
+          <option value="">Job Name</option>
+        {% for query in query_title %}
+          {% if query %}
+          <option value="{{query}}">{{query}}</option>
+          {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+      <div class="col-xs-6 col-sm-9 col-md-9 col-lg-3 col-xl-3 p-1">
+        <select id="query1" class="form-control" name="">
+          <option value="">Address</option>
+        {% for query in query_address_1 %}
+          {% if query %}
+          <option value="{{query}}">{{query}}</option>
+          {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+      <div class="col-xs-6 col-sm-9 col-md-9 col-lg-3 col-xl-3 p-1">
+        <select id="query2" class="form-control" name="">
+          <option value="">Category</option>
+        {% for query in query_category %}
+          {% if query %}
+          <option value="{{query}}">{{query}}</option>
+          {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+      <div class="col-xs-6 col-sm-9 col-md-9 col-lg-3 col-xl-3 p-1">
+        <select id="query3" class="form-control" name="">
+          <option value="">Salary</option>
+        {% for query in query_salary %}
+          {% if query %}
+          <option value="{{query}}">₱{{query|intcomma}}</option>
+          {% endif %}
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  <table id="jobs" class="display table table-bordered table-responsive w-100">
+      <thead>
+          <tr>
+            <th class="th-w-20" style="white-space: nowrap">Company</th>
+            <th class="th-w-20" style="white-space: nowrap">Job Name</th>
+            <th class="th-w-20" style="white-space: nowrap">Address</th>
+            <th class="th-w-20" style="white-space: nowrap">Category</th>
+            <th class="th-w-20" style="white-space: nowrap">Salary</th>
+            <th class="th-w-20" style="white-space: nowrap">Option</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% for ad in ads %}
+          <tr>
+              <td class="th-w-20" style="white-space: nowrap">
+                {% if ad.name%}
+                  {{ad.name}}
+                {% endif %}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">{{ad.title}}</td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {% if ad.address_1 %}
+                  {{ad.address_1}}
+                {% endif %}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                  {% if ad.job_category %}
+                    {{ad.job_category}}
+                  {% endif %}
+              </td>
+              <td class="th-w-20" style="white-space: nowrap">
+                {% if ad.salary %}
+                  ₱{{ad.salary|intcomma}}
+                {% endif %}
+              </td>
+              <td option-table-wid>
+                <div class="text-center pr-0">
+                  <a class="dropdown-item text-primary p-0"  data-toggle="modal" data-target="#bd-example-modal-lg1{{ ad.id }}"><i class="fas fa-eye"></i></a>
+                </div>
+              </td>
+              <div class="modal fade" id="bd-example-modal-lg1{{ ad.id }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                      <div class="card-header bg-c-tile text-white">
+                        <div class="card-title h1 row pb-1">
+                          <div class="col-12 h2 pl-2 pt-1">
+                            {{ad.name}}{% if ad.job_category %} - {{ad.job_category}}{% endif %}
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <span class="col-6 text-left p text-gray-200">{{ad.address_1}}, {% if ad.address_2 %}{{ ad.address_2 }}, {% endif %}{{ ad.city }}</span>
+                          <span class="col-6 text-right p text-gray-200">Contact us: +63{{ad.phone_number}} / {{ad.email_address}}</span>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="card-title">
+                          <div class="mb-4">
+                            <span class="h4 font-weight-bold"><u>{{ad.title}} | Up to PHP{{ad.salary|intcomma}}</u></span>
+                          </div>
+                          <!-- <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+                            <span class="h5"><span class="font-weight-bold">Salary: </span>{{ad.salary}}</span>
+                          </div> -->
+                        </div>
+
+                          {% if ad.image %}
+                          <div class="row">
+                            <div class="col-sm-6 col-md-6 col-lg-6 mb-2">
+                              <div class="">
+                                <div class="h5 font-weight-bold mb-1">
+                                  Description
+                                </div>
+                                <p>{{ad.description}}</p>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-6 mb-2">
+                              <div class="text-center">
+                                <img class="img-fluid img-custom-border p-4" src="{{ad.image.url}}" alt="advertisement image">
+                              </div>
+                            </div>
+                          </div>
+                          {% else %}
+                          <div class="pt-2 pl-2">
+                            <div class="h5 font-weight-bold mb-1">
+                              Description
+                            </div>
+                            <p>{{ad.description}}</p>
+                          </div>
+                          {% endif %}
+                      </div>
+                      {% if ad.personal_website%}
+                      <div class="card-footer bg-white">
+                        <div class="card-title text-center ">
+                          <span>For more information and inquiries please visit our website</span>
+                            <cite class="blockquote-footer"><a href="{{ad.personal_website}}">{{ad.personal_website}}</a>
+                            </cite>
+                        </div>
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+          </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<div id="Page1">
+  <div class="row">
+    <div class="rightcolumn">
+      <div id="accordion">
+        <div class="card shadow mb-4 mt-4 mr-2 ml-2">
+          <div class="card-header text-center bg-c-tile">
+            <a class="collapsed card-link" data-toggle="collapse" href="#collapseCategory">
+              <h4 class="card-title text-white">Jobs Category</h4>
+            </a>
+          </div>
+          <div id="collapseCategory" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                {% for job_category in job_categories %}
+                  {% if job_category %}
+                  <div class="col-lg-12 p-2">
+                    <a href="{% url 'categorized_job' job_category.id %}" class="btn btn-block btn-outline-warning">{{job_category.title}}</a>
+                  </div>
+                  {% else %}
+                  <div class="card-body">
+                    <p class="text-danger">No job category</p>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow mb-4 mt-4 mr-2 ml-2 d-none d-lg-block">
+        <div class="card-body">
+          <div class="card-title">
+            <h4 >About</h4><hr>
+          </div>
+          <div class="text-center">
+              <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
+                  src="{% static 'img/browse.svg' %}" alt="Browse-Visualizer">
+          </div>
+          <p>This feature helps you to view all the
+            posted jobs from latest to oldest.
+        </div>
+      </div>
+      <div class="card shadow mb-4 mt-4 mr-2 ml-2 d-none d-lg-block">
+        <div class="card-body">
+          <div class="text-center">
+              <img class="img-fluid px-3 px-sm-4 mt-3 mb-4"
+                  src="{% static 'img/analytics.svg' %}" alt="Browse-Visualizer">
+          </div>
+          <hr>
+          <p>Advertised: <span class="text-info">{{count_jobs_advertised}}</span></p>
+          <p>Job Request: <span class="text-warning">{{count_job_requests}}</span></p>
+          <!-- <p>Employed: <span class="text-success">{{count_employed}}</span></p>
+          <p>Unemployed: <span class="text-danger">{{count_unemployed}}</span></p> -->
+        </div>
+      </div>
+    </div>
+    <div class="leftcolumn">
+      {% for ad in ads %}
+      <div class="card shadow mb-4 mt-4 mr-2 ml-2 ">
+        <div class="card-header pl-3 pr-4 pt-3 pb-0 m-0 bg-c-tile text-white">
+          <div class="card-title">
+            <div class="row">
+              <div class="col-11">
+                <div class="mr-auto">
+                  <div class="h5">
+                    {{ad.name}}{% if ad.job_category %} - {{ad.job_category}}{% endif %}
+                  </div>
+                  <div class="p text-gray-200">
+                    Contact us: +63{{ad.phone_number}} / {{ad.email_address}}
+                  </div>
+
+                </div>
+              </div>
+              <!-- <div class="ml-auto">
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-white"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                        aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-header">Options</div>
+                        <a class="dropdown-item text-info" href="{% url 'update_ad' ad.id %}"><i class="mr-2 fas fa-wrench"></i>Update</a>
+                        <form method="post" action="{% url 'delete_ad' ad.id %}" >
+                          {% csrf_token %}
+                          <button type="submit" class="dropdown-item text-danger"><i class="mr-2 fas fa-trash-alt"></i>Delete</button>
+                        </form>
+                    </div>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          {% if ad.image %}
+          <div class="row m-auto">
+            <div class="col-lg-6">
+              <h4 class="card-title">{{ad.title}} | Up to PHP{{ad.salary|intcomma}}!</h4>
+              <p class="card-text">{{ad.description}}</p>
+              <br>
+              <h6 class="card-subtitle pb-1">{{ad.date_created}}</h6>
+              <h6 card-subtitle pb-1>{{ad.address_1}}, {% if ad.address_2 %}{{ ad.address_2 }}, {% endif %}{{ ad.city }}</h6>
+              Visit us at <cite><a href="{{ad.personal_website}}">{{ad.personal_website}}</a></cite>
+
+            </div>
+            <div class="col-lg-6 m-auto">
+                <img class="img-fluid img-custom-border p-4" src="{{ad.image.url}}" alt="advertisement image">
+            </div>
+          </div>
+          {% else %}
+          <div class="col-lg-12">
+            <h4 class="card-title">{{ad.title}} | Up to PHP{{ad.salary|intcomma}}!</h4>
+            <p class="card-text">{{ad.description}}</p>
+            <br>
+            <h6 class="card-subtitle pb-1">{{ad.date_created}}</h6>
+            <h6 card-subtitle pb-1>{{ad.address_1}}, {% if ad.address_2 %}{{ ad.address_2 }}, {% endif %}{{ ad.city }}</h6>
+            Visit us at <cite><a href="{{ad.personal_website}}">{{ad.personal_website}}</a></cite>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Datatables -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.js"></script>
+
+<!-- Sweet Alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  {% for message in messages %}
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: '{{message}}',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  {% endfor %}
+</script>
+
+<script>
+  $(document).ready(function() {
+    var table = $('#jobs').DataTable( {
+      stateSave: false,
+      "ordering": true,
+      "columnDefs" : [{"targets":4, "type":"date-eu"}],
+      order: [],
+
+    } );
+    $('#query0').on('change', function(){
+       table.columns(1).search(this.value).draw();
+    });
+    $('#query1').on('change', function(){
+       table.columns(2).search(this.value).draw();
+    });
+    $('#query2').on('change', function(){
+       table.columns(3).search(this.value).draw();
+    });
+    $('#query3').on('change', function(){
+       table.columns(4).search(this.value).draw();
+    });
+} );
+</script>
+
+{% endblock %}

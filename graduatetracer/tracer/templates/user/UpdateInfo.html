@@ -1,0 +1,173 @@
+{% extends 'user/template.html'%}
+{% block title %}Update Users' Information{% endblock %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+    .profile-pic-div {
+        float: right;
+        max-height: 200px;
+        max-width: 200px;
+        position: relative;
+        overflow: hidden;
+    }
+    #photo {
+        height: 100%;
+        width: 100%;
+    }
+
+    #uploadBtn {
+    height: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid rgb(160, 160, 160);
+    color: wheat;
+    line-height: 30px;
+    font-family: sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    }
+
+    ::-webkit-file-upload-button {
+    font: inherit;
+    -webkit-appearance: button
+    }
+    [hidden] {
+    display: none!important
+    }
+
+</style>
+
+<div class="container-fluid">
+  <div class="row d-flex justify-content-center">
+    <div class="col-lg-12">
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row mb-2 " style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+          <div class="col-sm 12 col-md-12 col-lg-4">
+            <div class="d-flex flex-column align-items-center text-center pt-2 pb-4">
+              <div class="col-lg-0 mt-4 mb-4">
+                <div class="col-lg-12 mt-4 profile-pic-div">
+                  <img class="img-custom-border mb-2" src="{{request.user.profile_picture.url}}" id="photo">
+                  <input type="file" id="file" name="profile" hidden>
+                  <label for="file" id="uploadBtn">Choose Profile</label>
+                </div>
+              </div>
+              <h6>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h6>
+              <div class="col-md-12 ">
+                <span class="text-black-70">{{user.email}}</span>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <label class="labels">First Name</label>
+              {{grad_info.first_name}}
+            </div>
+            <div class="col-md-12 ">
+              <label class="labels">Middle Name</label>
+              {{grad_info.middle_name}}
+            </div>
+            <div class="col-md-12 ">
+              <label class="labels">Last Name</label>
+              {{grad_info.last_name}}
+            </div>
+          </div>
+
+          <div class="col-sm-12 col-md-6 col-lg-4 mt-0">
+            <div class="pt-4">
+              <div class="text-center d-flex justify-content-between align-items-center mb-5">
+                <h4 class="text-right"><b>Profile Settings</b></h4>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Birthdate</label>
+                  {{grad_info.birth_date}}
+                </div>
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Age</label>
+                  {{grad_info.age}}
+                </div>
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Gender</label>
+                  {{grad_info.gender}}
+                </div>
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Address</label>
+                  {{grad_info.address}}
+                </div>
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Contact Number</label>
+                  {{grad_info.contact_number}}
+                </div>
+                <div class="col-md-12 pb-3">
+                  <label class="labels">ID Number</label>
+                  {{grad_info.IDNum}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <br>
+          <div class="col-sm-12 col-md-6 col-lg-4 mt-0">
+            <div class="pt-4">
+              <div class="text-center d-flex justify-content-between align-items-center mb-5" style="opacity: 0!important;">
+                <h4 class="text-right"><b> asdasd </b></h4>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Year Graduated</label>
+                  {{grad_info.date_graduated}}
+                </div>
+
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Course</label>
+                  {% render_field grad_info.course_type class="form-control" %}
+                </div>
+
+                <div class="col-md-12 pb-3">
+                  <label class="labels">School</label>
+                  {% render_field grad_info.school class="form-control" %}
+                </div>
+                
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Employment Status</label>
+                  {{grad_info.employment_status}}
+                </div>
+
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Job Description</label>
+                  {{grad_info.job_description}}
+                </div>
+
+                <div class="col-md-12 pb-3">
+                  <label class="labels">Skills</label>
+                  {% comment %} {{grad_info.skill}} {% endcomment %}
+                  {% render_field grad_info.skill class="form-control" name="skill" %}
+                <div class="pt-3 text-center">
+                  <a href="{% url 'DisplayGradInfo' %}" class="btn btn-outline-warning mt-4">
+                    <i class="fa fa-fw fa-lg fas fa-exclamation-triangle"></i>
+                    Cancel
+                  </a>
+                  <button type="submit" name="UpdateGradInfo" role="button" class="btn btn-outline-success mt-4">
+                    <i class="fa fa-fw fa-lg fa-check-circle"></i>
+                    Update Profile
+                  </button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="{% static '/js/user/profile.js' %}"></script>
+
+
+{% endblock %}

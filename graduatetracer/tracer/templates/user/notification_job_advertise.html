@@ -1,0 +1,66 @@
+{%  extends 'user/template.html' %}
+{% block title %}Notification Job Advertise{% endblock %}
+{% load humanize %}
+
+{% block content %}
+  <div class="text-right pb-3">
+
+  </div>
+  <div class="card shadow mb-4">
+    <div class="card-header bg-c-tile text-white pb-3">
+      <div class="card-title h1 row pb-1">
+        <div class="col-11 h2 pl-2 pt-1">
+          {{notification.name}}{% if notification.job_category %} - {{notification.job_category}}{% endif %}
+        </div>
+      </div>
+      <div class="row">
+        <span class="col-6 text-left p text-gray-100">{{notification.address_1}}, {% if notification.address_2 %}{{ notification.address_2 }}, {% endif %}{{ notification.city }}</span>
+        <span class="col-6 text-right p text-gray-100">Contact us: +63{{notification.phone_number}} / {{notification.email_address}}</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="card-title">
+        <div class="mb-4">
+          <span class="h4 font-weight-bold"><u>{{notification.title}} | Up to PHP{{notification.salary|intcomma}}</u></span>
+        </div>
+        <!-- <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+          <span class="h5"><span class="font-weight-bold">Salary: </span>{{notification.salary}}</span>
+        </div> -->
+      </div>
+
+        {% if notification.image %}
+        <div class="row">
+          <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+            <div class="">
+              <div class="h5 font-weight-bold mb-1">
+                Description
+              </div>
+              <p>{{notification.description}}</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6 mb-4">
+            <div class="text-center">
+              <img class="img-fluid img-custom-border p-4" src="{{notification.image.url}}" alt="advertisement image">
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <div class="pt-2 pl-2">
+          <div class="h5 font-weight-bold mb-1">
+            Description
+          </div>
+          <p>{{notification.description}}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% if notification.personal_website%}
+    <div class="card-footer bg-white">
+      <div class="card-title text-center ">
+        <span>For more information and inquiries please visit our website</span>
+          <cite class="blockquote-footer mt-3"><a href="{{notification.personal_website}}">{{notification.personal_website}}</a>
+          </cite>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}

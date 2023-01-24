@@ -1,0 +1,85 @@
+{% load humanize %}
+{% load static %}
+
+<style>
+    .topbar-divider.d-none.d-sm-block {
+        width: 0;
+        border-right: 1px solid #e3e6f0;
+        height: calc(4.375rem - 2rem);
+        margin: auto 1rem;
+    }
+    .header-nav .nav-profile img {
+        max-height: 36px;
+        height: 2rem;
+        width: 2rem;
+        margin-right: 11px;
+    }
+</style>
+<!-- ======= Header ======= -->
+<div class="d-flex align-items-center justify-content-between">
+    <div class="logo d-flex align-items-center">
+    {% comment %} <img src="{% static 'img/GradTracerLogo.png' %}" alt=""> {% endcomment %}
+    <span class="d-none d-lg-block mx-5">Admin</span>
+    </div>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+</div><!-- End Logo -->
+
+
+<nav class="header-nav ml-auto">
+    <ul class="d-flex align-items-center">
+
+        <div class="topbar-divider d-none d-sm-block"></div>
+
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link nav-profile" href="#" id="userDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user.first_name}} {{user.middle_name}} {{user.last_name}}</span>
+                {% if user.profile_picture %}
+                <img class="rounded-circle mr-auto" src="{{request.user.profile_picture.url}}">
+                {% else %}
+                <img class="rounded-circle mr-auto" src="{% static 'img/default_profile_2.png'  %}">
+                {% endif %}
+            </a>
+             <!-- Dropdown - User Information -->
+             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
+             aria-labelledby="userDropdown">
+             <div class="dropdown-header">
+                <h6>{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h6>
+                <span>{{user.email}}</span>
+              </div>
+              <div class="dropdown-divider"></div>
+             <a class="dropdown-item d-flex align-items-center" href="{% url 'adprof' request.user.id %}">
+                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                 Profile
+             </a>
+             <div class="dropdown-divider"></div>
+             <a class="dropdown-item d-flex align-items-center" href="{% url 'logout' %}" data-toggle="modal" data-target="#logoutModal">
+                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+             </a>
+         </div>
+
+     </li>
+
+ </ul>
+
+</nav>
+<!-- Modal -->
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false" style="background-color: rgba(0,0,0,0.5);">
+ <div class="modal-dialog modal-dialog-centered" role="document">
+     <div class="modal-content">
+         <div class="modal-header">
+             <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+             <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">×</span>
+         </button>
+         </div>
+         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+         <div class="modal-footer">
+             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+             <a class="btn btn-danger" href="{% url 'logout' %}">Logout</a>
+         </div>
+     </div>
+ </div>
+</div>
+<!-- End of Topbar -->

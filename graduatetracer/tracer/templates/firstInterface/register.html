@@ -1,0 +1,211 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+<html>
+ 
+<head>
+    <link rel="icon" href="{% static 'img/ctu_logo.png' %}" type="image/gif" sizes="16x16">
+    <title>CTU Register Page</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    {% include 'firstInterface/css.html' %}
+
+    <style>
+      .button.btn.btn-success {
+        white-space: nowrap;
+        text-align: center;
+      }
+    </style>
+</head>
+ 
+<body class="bg-gradient-primary" onload="passwordAddClass()" >
+ 
+    <div class="container">
+ 
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+ 
+            <div class="col-xl-10 col-lg-12 col-md-9">
+ 
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-8">
+                                    <div class="text-center">
+                    <img src="{% static 'img/CTU.png'%}" width="85px" alt="CTU LOGO">
+                                        <h5 class="text-gray-900 mb-4 pt-2">CREATE ACCOUNT</h5>
+                                    </div>
+                                    <form class="user" method="POST" action="" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                    <div class="row g-3">
+                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
+                        <label for="inputFirstname" class="form-label" Required="first_name">First Name</label>
+                                                {{ form.first_name }}
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
+                        <label for="inputMiddlename" class="form-label" Required="middle_name">Middle Name</label>
+                        {{ form.middle_name }}
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                        <label for="inputLastname" class="form-label" Required="last_name">Last Name</label>
+                        {{ form.last_name }}
+                      </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputIDNumber" class="form-label" Required="IDNum">ID Number</label>
+                                                {{form.IDNum}}
+                      </div>
+                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputEmail" class="form-label" Required="email">Email</label>
+                        {{ form.email }}
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputCourse" class="form-label" Required="course_type">Course Type</label>
+                        {{ form.course_type}}
+                      </div>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputSchool" class="form-label" Required="school">School</label>
+ 
+                            {% render_field form.school class="form-control" onchange="School()" id="id_school" %}
+ 
+                            {% render_field form.argaoCampus style="display:none;" %}
+                            {% render_field form.bariliCampus style="display:none;" %}
+                            {% render_field form.carmenCampus style="display:none;" %}
+                            {% render_field form.CCMECampus style="display:none;"%}
+                            {% render_field form.daanbantayanCampus style="display:none;"%}
+                            {% render_field form.danaoCampus style="display:none;"%}
+                            {% render_field form.dumanjugExt style="display:none;"%}
+                            {% render_field form.ginatilanExt style="display:none;"%}
+                            {% render_field form.malabuyocExt style="display:none;"%}
+                            {% render_field form.mainCampus style="display:none;"%}
+                            {% render_field form.moalboalCampus style="display:none;"%}
+                            {% render_field form.nagaExt style="display:none;"%}
+                            {% render_field form.oslobExt style="display:none;"%}
+                            {% render_field form.pinamungajanExt style="display:none;"%}
+                            {% render_field form.sanfernandoExt style="display:none;"%}
+                            {% render_field form.sanfranciscoCampus style="display:none;"%}
+                            {% render_field form.tuburanCampus style="display:none;"%}
+ 
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputYear" class="form-label" Required name="date_graduated">Year Graduated</label>
+                            {{ form.date_graduated }}
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputEmployment_Status" class="form-label" Required name="employment_status">Employment Status</label>
+ 
+                            {% render_field form.employment_status class="form-control" onchange="Employment_Status()" id="id_employment_status" %}
+ 
+                            {% render_field form.employed style="display:none;" %}
+                            {% render_field form.unemployed style="display:none;" %}
+ 
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputPassword" class="form-label" Required="password1">Password</label>
+                        {{ form.password1 }}
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                        <label for="inputConfirmpass" class="form-label" Required="password2">Confirm Pasword</label>
+                        {{ form.password2 }}
+                      </div>
+                      <div class="d-grid gap-2 col-6 mx-auto">
+                        <button class="btn btn-success" role="button" aria-pressed="true" type="submit" value="Register" style="white-space: nowrap;
+        text-align: center;">Register Account</button>
+                      </div>
+                    </div>
+                  </form>
+                                    {% for message in messages %}
+                                    <p id="messages">{{message}}</p>
+                                    {% endfor %}
+                                    <hr>
+                                    <div class="text-center mb-2">
+                                        Already have an account?
+                    <a class="small" href="{% url 'login' %}" class="ml-2"><strong>LOGIN</strong></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
+            </div>
+ 
+        </div>
+ 
+    </div>
+</body>
+ 
+</html>
+<script type="text/javascript">
+        function passwordAddClass(){
+            pass1 = document.getElementById('id_password1')
+            pass1.classList.add('form-control')
+            pass2 = document.getElementById('id_password2')
+            pass2.classList.add('form-control')
+        }
+        function Employment_Status() {
+            var employment_status_value = document.getElementById("id_employment_status").value;
+            const array_of_employment_status_value = ["Employed","Unemployed"];
+            const array_of_employment_status_id = ["id_employed","id_unemployed"];
+            var i = 0;
+            while(i != array_of_employment_status_value.length){
+                    if(i != array_of_employment_status_value.length){
+                            if(employment_status_value == array_of_employment_status_value[i]){
+                                    document.getElementById(array_of_employment_status_id[i]).checked = true;
+                             }else{
+                                    document.getElementById(array_of_employment_status_id[i]).checked = false;
+                             }
+                             i++;
+                        }else{
+                            i = 0;
+                        }
+                }
+        }
+        function School(){
+            var school_value = document.getElementById("id_school").value ;
+ 
+            const array_of_school_value = ["Argao Campus","Barili Campus","Carmen Campus","Cebu City Mountain Extension Campus","Daanbantayan Campus","Danao Campus",
+                                                                "Dumanjug Extension Campus", "Ginatilan Extension Campus", "Malabuyoc Extension Campus", "Main Campus","Moalboal Campus","Naga Extension Campus",
+                                                                "Oslob Extension Campus","Pinamungajan Extension Campus","San Fernando Extension Campus","San Francisco Campus","Tuburan Campus",];
+ 
+            const array_of_school_id = ["id_argaoCampus","id_bariliCampus","id_carmenCampus","id_CCMECampus","id_daanbantayanCampus","id_danaoCampus",
+                                                                "id_dumanjugExt", "id_ginatilanExt", "id_malabuyocExt", "id_mainCampus","id_moalboalCampus","id_nagaExt",
+                                                                "id_oslobExt","id_pinamungajanExt","id_sanfernandoExt","id_sanfranciscoCampus","id_tuburanCampus",];
+            var i = 0;
+            while(i != array_of_school_value.length){
+                    if(i != array_of_school_value.length){
+                            if(school_value == array_of_school_value[i]){
+                                    document.getElementById(array_of_school_id[i]).checked = true;
+                                }else{
+                                    document.getElementById(array_of_school_id[i]).checked = false;
+                                }
+                                i++;
+                        }else{
+                            i = 0;
+                        }
+                }
+        }
+ 
+</script>
+ 
+<script>
+    let dateDropdown = document.getElementById('date-dropdown');
+ 
+    let currentYear = new Date().getFullYear();
+    let earliestYear = 1970;
+ 
+    while (currentYear >= earliestYear) {
+      let dateOption = document.createElement('option');
+      dateOption.text = currentYear;
+      dateOption.value = currentYear;
+      dateDropdown.add(dateOption);
+      currentYear -= 1;
+    }
+  </script>
+ 
+ 
+

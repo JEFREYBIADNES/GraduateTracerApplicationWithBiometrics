@@ -1,0 +1,179 @@
+{% load static %}
+<!-- Chatbot -->
+
+<style>
+  .btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: none;
+  }
+  .display-none{
+    display= none;
+  }
+  #firstLoad, #secondLoad, #jobLoad, #categoryLoad, #annoucementLoad, #votingLoad, #imgLoad {
+    display: none;
+  }
+  img.img-profile.rounded-circle.w-10 {
+    width: 30px;
+    height: 30px;
+  }
+  h4.m-2 {
+    margin: 13.5rem!important;
+  }
+  a {
+    color: var(--bs-link-color);
+    text-decoration: none;
+  }
+</style>
+<div class="container">
+    <div class="row">
+     <div id="Smallchat">
+    <div class="Layout Layout-open Layout-expand Layout-right" style="background-color: #3F51B5;color: rgb(255, 255, 255);opacity: 5;border-radius: 10px;">
+      <div class="Messenger_messenger">
+        <div class="Messenger_header">
+          <div class="chat_close_icon">
+            <div class="Messenger_prompt w-100 ">
+              <h4 class="m-2"><img class="img-profile rounded-circle w-10" src="{% static 'img/xonnia_profile.jpg'%}" alt="xonnia profile"> Xonnia</h4>
+            </div>
+          </div>
+        </div>
+        <div class="Messenger_content">
+          <div class="Messages">
+            <div class="Messages_list msg_card_body">
+              <div class="d-flex justify-content-start mt-2">
+                <div id="firstLoad" class="img_cont_msg">
+                  <img class="img-profile rounded-circle user_img_msg" src="{% static 'img/xonnia_profile.jpg'%}" alt="xonnia profile">
+                </div>
+                <div id="secondLoad" class="msg_cotainer  bg-c-lite-green" style="width: 75%;">
+                  <p class="m-1">Hello {{request.user.first_name}} {{request.user.middle_name}} {{request.user.last_name}}, how can i help you ?</p>
+                </div>
+              </div>
+              <div class="d-flex justify-content-start mt-2">
+                <div id="imgLoad" class="img_cont_msg">
+                  <img class="img-profile rounded-circle user_img_msg" src="{% static 'img/xonnia_profile.jpg'%}" alt="xonnia profile">
+                </div>
+                <div id="accordion">
+                  <div id="annoucementLoad" class="msg_cotainer mb-2 pr-0 bg-dark">
+                    <div id="headingOne">
+                      <h5 class="mb-0">
+                        <button class="btn text-white msg-width p-0 " data-toggle="collapse" data-target="#collapseChatbot" aria-expanded="true" aria-controls="collapseChatbot">
+                          <p class="text-left m-0"><i class="mr-2 ml-2 fas fa-bullhorn"></i> Announcements</p>
+                          {% if user_announcement_notifications_counter != 0 %}
+                          <span class="badge">{{user_announcement_notifications_counter}}</span>
+                          {% endif %}
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseChatbot" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                      <div class="card-body p-1">
+                        {% for announcement in announcements %}
+                          {% if announcement %}
+                            {% if announcement.announcement_notif_counter == True %}
+                            <a href="{% url 'display_announcement_notification' announcement.id %}"><p class="m-1 p-1 text-gray-400 nav-link">{{announcement.id}}. {{announcement.title}} {{announcement.announcement_notif_counter}}</p></a>
+                            {% else %}
+                            <a href="{% url 'display_announcement_notification' announcement.id %}"><p class="m-1 p-1 text-gray-100 font-weight-bold nav-link">{{announcement.id}}. {{announcement.title}} {{announcement.announcement_notif_counter}}</p></a>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                  <div id="jobLoad" class="msg_cotainer mb-2 pr-0 bg-white shadow-sm border border-dark">
+                    <div id="headingTwo">
+                      <h5 class="mb-0">
+                        <button class="btn text-dark msg-width p-0 " data-toggle="collapse" data-target="#collapseChatbotTwo" aria-expanded="true" aria-controls="collapseChatbotTwo">
+                          <p class="text-left m-0"><i class="mr-2 ml-2 fas fa-question-circle"></i> Jobs Available</p>
+                          {% if user_job_advertise_notifications_counter != 0 %}
+                          <span class="badge">{{user_job_advertise_notifications_counter}}</span>
+                          {% endif %}
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseChatbotTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                      <div class="card-body p-1">
+                        {%for job in jobs %}
+                          {% if job %}
+                            {% if job.job_advertise_notif_counter %}
+                            <a href="{% url 'display_job_advertised_notification' job.id %}"><p class="m-1 text-gray-700">{{job.id}}. {{job.title}}</p></a>
+                            {% else %}
+                            <a href="{% url 'display_job_advertised_notification' job.id %}"><p class="m-1 text-dark font-weight-bold">{{job.id}}. {{job.title}}</p></a>
+                            {% endif %}
+                          {% endif %}
+                        {%endfor%}
+                        <a class="m-0 p-1 text-dark nav-link " href="{% url 'available_jobs' %}">Browse...</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="categoryLoad" class="msg_cotainer mb-2 pr-0 bg-dark">
+                    <div id="headingThree">
+                      <h5 class="mb-0">
+                        <button class="btn text-white msg-width p-0 " data-toggle="collapse" data-target="#collapseChatbotThree" aria-expanded="true" aria-controls="collapseChatbotThree">
+                          <p class="text-left m-0"><i class="mr-2 ml-2 fas fa-search"></i> Job Categories</p>
+                          {% if user_job_category_notif_counter != 0 %}
+                          <span class="badge">{{user_job_category_notif_counter}}</span>
+                          {% endif %}
+                        </button>
+                      </h5>
+                    </div>
+                    <div id="collapseChatbotThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                      <div class="card-body p-1">
+                        {% for job_category in job_categories %}
+                          {% if job_category %}
+                            {% if job_category.job_category_notif_counter == True %}
+                              <a href="{% url 'display_job_category_notification' job_category.id %}" class="m-1 p-1 text-gray-400 nav-link"><i class="fas fa-arrow-right mr-1"></i> {{job_category.title}}</a>
+                            {% else %}
+                              <a href="{% url 'display_job_category_notification' job_category.id %}" class="m-1 p-1 text-gray-100 font-weight-bold nav-link"><i class="fas fa-arrow-right mr-1"></i> {{job_category.title}}</a>
+                            {% endif %}
+                          {% else %}
+                          <div class="card-body">
+                            <p class="text-danger">No job category</p>
+                          </div>
+                          {% endif %}
+                        {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--===============CHAT ON BUTTON STRART===============-->
+    <div class="chat_on">
+      <img class="img-profile rounded-circle w-100" src="{% static 'img/xonnia_profile.jpg'%}" alt="xonnia profile">
+      {% if user_chat_bot_notifications_count != 0 %}
+        <span class="badge">{{user_chat_bot_notifications_count}}</span>
+      {% endif %}
+    </div>
+
+    <!--===============CHAT ON BUTTON END===============-->
+  </div>
+    </div>
+</div>
+
+<!-- Chatbot Jquery -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#firstLoad').delay(1000).fadeIn(3000);
+  });
+  $(document).ready(function() {
+    $('#secondLoad').delay(1000).fadeIn(3000);
+  });
+  $(document).ready(function() {
+    $('#imgLoad').delay(1500).fadeIn(2000);
+  });
+  $(document).ready(function() {
+    $('#annoucementLoad').delay(1500).fadeIn(2000);
+  });
+  $(document).ready(function() {
+    $('#jobLoad').delay(1500).fadeIn(2000);
+  });
+  $(document).ready(function() {
+    $('#categoryLoad').delay(1500).fadeIn(2000);
+  });
+  $(document).ready(function() {
+    $('#votingLoad').delay(1500).fadeIn(2000);
+  });
+</script>

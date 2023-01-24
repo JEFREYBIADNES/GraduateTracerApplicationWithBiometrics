@@ -1,0 +1,52 @@
+{% extends 'user/template.html' %}
+{% block title %}Friend List{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="pagetitle">
+  <h1>My Friends</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'DashboardUser' %}">Home</a></li>
+      <li class="breadcrumb-item active">Friends</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+<hr>  
+
+<div class="container-fluid">
+  <div class="row">
+    {% for grad_info in grad_infos %}
+      {% if grad_info.approved %}
+        {% if grad_info.email != request.user.email %}
+          <div class="col-sm-12 col-md-6 col-lg-3 col-xl-3 mb-2">
+            <div class="card shadow-sm">
+              <div class="card-header text-center text-dark">
+                <div class="mt-2">
+                  <img class="img-profile rounded-circle shadow-sm" src="{{grad_info.profile_picture.url}}" width="100" height="90" alt="User-Profile-Image">
+                  <div class="mt-1">
+                    <h6 style="margin-bottom: -1%;text-align:center"><b>{{grad_info.first_name}} {{grad_info.middle_name}} {{grad_info.last_name}}</b></h6>
+                    <p>{{grad_info.email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="mt-2">
+                    <div class="col-sm-12">
+                      <p>Skills: {{grad_info.skill}}</p>
+                    </div>
+                    <div class="col-sm-12">
+                      <p>School: {{grad_info.school}}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}
