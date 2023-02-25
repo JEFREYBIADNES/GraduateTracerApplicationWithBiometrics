@@ -26,6 +26,47 @@
 			background-repeat: no-repeat;
 			background-size: 320px 320px;
 		}
+		i#show_eye {
+			float: right;
+			margin-right: 10px;
+			margin-top: 16px;
+			position: relative;
+			z-index: 2;
+			color: #6e707e;
+			cursor: pointer;
+		}
+		i#hide_eye {
+			float: right;
+			margin-right: 10px;
+			margin-top: 16px;
+			position: relative;
+			z-index: 2;
+			color: #6e707e;
+			cursor: pointer;
+		}
+
+		.eye {
+			position: absolute;
+			top: 35%;
+			right: 10px;
+			transform: translateY(-50%);
+			cursor: pointer;
+			z-index: 2;
+		}
+
+		input#password-field {
+			font-size: 0.8rem;
+			border-radius: 10rem;
+			padding: 1.5rem 1rem;
+			border-bottom-left-radius: 0;
+			border-top-left-radius: 0;
+		}
+		.position-relative {
+			flex: 1 1 auto;
+			width: 1%;
+			min-width: 0;
+			margin-bottom: 0;
+		}
 	</style>
 
 <body class="bg-gradient-primary">
@@ -51,20 +92,25 @@
 									</div>
 									<form class="user" method="POST" action="">
 										{% csrf_token %}
-										<div class="input-group mby-1">
+										<div class="input-group mb-4">
 											<div class="input-group-append">
 												<span class="input-group-text"><i class="fas fa-user"></i></span>
 											</div>
-											<input type="text" class="form-control form-control-user" name="email"
+											<input type="email" class="form-control form-control-user" name="email"
 												aria-describedby="emailHelp" placeholder="Email">
-										</div>
-										<br>
-										<div class="input-group mb-2">
-											<div class="input-group-append">
-												<span class="input-group-text mb-2"><i class="fas fa-key"></i></span>
 											</div>
-											<input type="password" class="form-control form-control-user mb-2"
-												name="password" id="exampleInputPassword" placeholder="Password">
+											<div class="input-group mb-4">
+											<div class="input-group-append">
+												<span class="input-group-text"><i class="fas fa-key"></i></span>
+											</div>
+											<div class="position-relative">
+												<input type="password" class="form-control form-control-user" 
+												name="password" id="password-field" placeholder="Password">
+												<span class="eye">
+												<i class="fa fa-eye-slash" id="show_eye" onclick="togglePasswordVisibility()"></i>
+												<i class="fa fa-eye d-none" id="hide_eye" onclick="togglePasswordVisibility()"></i>
+												</span>
+											</div>
 										</div>
 										<input class="btn btn-primary btn-user btn-block mb-2" type="submit"
 											value="Log In">
@@ -92,6 +138,23 @@
 		</div>
 
 	</div>
+	<script>
+		function togglePasswordVisibility() {
+		var passwordField = document.getElementById("password-field");
+		var showIcon = document.getElementById("show_eye");
+		var hideIcon = document.getElementById("hide_eye");
+
+		if (passwordField.type === "password") {
+			passwordField.type = "text";
+			showIcon.classList.add("d-none");
+			hideIcon.classList.remove("d-none");
+		} else {
+			passwordField.type = "password";
+			showIcon.classList.remove("d-none");
+			hideIcon.classList.add("d-none");
+		}
+		}
+	</script>
 </body>
 
 </html>

@@ -180,7 +180,7 @@ def school_report(request):
         unemployed_counter+=[0]
         i+=1
     for user in users:
-        if user.graduate:
+        if user.graduate and user.approved:
             while j != len(school_list):
                 if user.school == school_list[j]:
                     graduate_counter[j]+=1

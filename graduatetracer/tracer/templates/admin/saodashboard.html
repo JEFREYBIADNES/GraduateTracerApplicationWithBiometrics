@@ -37,7 +37,41 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Users</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{count_users}}</div>
+                            {% if user.is_argaoCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{argao_count_users}}</div>
+                            {% elif user.is_bariliCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{barili_count_users}}</div>
+                            {% elif user.is_carmenCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{carmen_count_users}}</div>
+                            {% elif user.is_CCMECampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{cebu_count_users}}</div>
+                            {% elif user.is_daanbantayanCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{daan_count_users}}</div>
+                            {% elif user.is_dumanjugExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{dumanjug_count_users}}</div>
+                            {% elif user.is_danaoCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{danao_count_users}}</div>
+                            {% elif user.is_ginatilanExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ginatilan_count_users}}</div>
+                            {% elif user.is_malabuyocExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{malabuyoc_count_users}}</div>
+                            {% elif user.is_mainCampus%}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{main_count_users}}</div>
+                            {% elif user.is_moalboalCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{moalboal_count_users}}</div>
+                            {% elif user.is_nagaExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{naga_count_users}}</div>
+                            {% elif user.is_oslobExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{oslob_count_users}}</div>
+                            {% elif user.is_pinamungajanExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{pinamungajan_count_users}}</div>
+                            {% elif user.is_sanfernandoExt %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{sanfernando_count_users}}</div>
+                            {% elif user.is_sanfranciscoCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{sanfrancisco_count_users}}</div>
+                            {% elif user.is_tuburanCampus %}
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{tuburan_count_users}}</div>
+                            {% endif%}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-gray-800"></i>
@@ -72,44 +106,605 @@
         <div class="col-lx-6 col-lg-6">
           <!-- Analytics -->
           <div class="card shadow-sm mb-4">
-              <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-gradient-success">
+                    <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-fw fa-chart-area mr-2"></i>Registered Graduates</h6>
+                </div>
+                {% if user.is_argaoCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{argao_count_employed}},{{argao_count_unemployed}},{{argao_count_approved}},{{argao_count_pending}}];
 
-                  <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-fw fa-chart-area mr-2"></i>Registered Graduates: {{count_approved}}</h6>
-              </div>
-              <div class="card-body">
-                  <canvas id="analyticsChart"></canvas>
-                <script>
-                  var xValues = ["Employed","Unemployed", "Approved", "Pending"];
-                  var yValues = [{{count_employed}},{{count_unemployed}},{{count_approved}},{{count_pending}}];
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
 
-                  var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
-
-                  new Chart("analyticsChart", {
-                    type: "bar",
-                    data: {
-                    labels: xValues,
-                    datasets: [{
-                      backgroundColor: barColors,
-                      data: yValues
-                    }]
-                  },
-                  options: {
-                    legend: {display: false},
-                    title: {
-                      display: true,
-                      text: "Analytics"
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
                     },
-                    scales: {
-                      yAxes: [{
-                        ticks: {
-                          beginAtZero: true
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
                         },
-                          maxBarThickness: 25,}]
-                      }
-                  }
-                  });
-                  </script>
-              </div>
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_bariliCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{barili_count_employed}},{{barili_count_unemployed}},{{barili_count_approved}},{{barili_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_carmenCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{carmen_count_employed}},{{carmen_count_unemployed}},{{carmen_count_approved}},{{carmen_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_CCMECampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{cebu_count_employed}},{{cebu_count_unemployed}},{{cebu_count_approved}},{{cebu_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_daanbantayanCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{daan_count_employed}},{{daan_count_unemployed}},{{daan_count_approved}},{{daan_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_dumanjugExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{dumanjug_count_employed}},{{dumanjug_count_unemployed}},{{dumanjug_count_approved}},{{dumanjug_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.danaoCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{danao_count_employed}},{{danao_count_unemployed}},{{danao_count_approved}},{{danao_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_ginatilanExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{ginatilan_count_employed}},{{ginatilan_count_unemployed}},{{ginatilan_count_approved}},{{ginatilan_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.malabuyocExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{malabuyoc_count_employed}},{{malabuyoc_count_unemployed}},{{malabuyoc_count_approved}},{{malabuyoc_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_mainCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{main_count_employed}},{{main_count_unemployed}},{{main_count_approved}},{{main_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_moalboalCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{moalboal_count_employed}},{{moalboal_count_unemployed}},{{moalboal_count_approved}},{{moalboal_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_nagaExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{naga_count_employed}},{{naga_count_unemployed}},{{naga_count_approved}},{{naga_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_oslobExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{oslob_count_employed}},{{oslob_count_unemployed}},{{oslob_count_approved}},{{oslob_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_pinamungajanExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{pinamungajan_count_employed}},{{pinamungajan_count_unemployed}},{{pinamungajan_count_approved}},{{pinamungajan_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_sanfernandoExt %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{sanfernando_count_employed}},{{sanfernando_count_unemployed}},{{sanfernando_count_approved}},{{sanfernando_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_sanfranciscoCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{sanfrancisco_count_employed}},{{sanfrancisco_count_unemployed}},{{sanfrancisco_count_approved}},{{sanfrancisco_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% elif user.is_tuburanCampus %}
+                <div class="card-body">
+                    <canvas id="analyticsChart"></canvas>
+                    <script>
+                    var xValues = ["Employed","Unemployed", "Approved", "Pending"];
+                    var yValues = [{{tuburan_count_employed}},{{tuburan_count_unemployed}},{{tuburan_count_approved}},{{tuburan_count_pending}}];
+
+                    var barColors = ["#00FF7F","#FF6347", "#1E90FF","#FFA500" ,];
+
+                    new Chart("analyticsChart", {
+                        type: "bar",
+                        data: {
+                        labels: xValues,
+                        datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                        }]
+                    },
+                    options: {
+                        legend: {display: false},
+                        title: {
+                        display: true,
+                        text: "Analytics"
+                        },
+                        scales: {
+                        yAxes: [{
+                            ticks: {
+                            beginAtZero: true
+                            },
+                            maxBarThickness: 25,}]
+                        }
+                    }
+                    });
+                    </script>
+                </div>
+                {% endif%}
           </div>
  <!-- Help -->
           <div class="card shadow-sm mb-4">

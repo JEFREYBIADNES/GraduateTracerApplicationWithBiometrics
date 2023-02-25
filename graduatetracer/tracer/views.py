@@ -76,8 +76,13 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            if request.user.approved:
-                return redirect('DashboardUser')
+            if request.user.is_graduate:
+                if request.user.approved:
+                    return redirect('DashboardUser')
+                elif request.user.pending:
+                    messages.error(
+                    request, 'You have not approved by the SAO yet, Please wait.')
+                    return redirect('login')
             elif request.user.is_admin_sao:
                 return redirect('saodashboard')
             elif request.user.is_dean:
@@ -89,9 +94,11 @@ def loginPage(request):
             elif request.user.is_university_pres:
                 return redirect('admindash')
             else:
-                return HttpResponse('You are not authorized to view this page')
+                messages.error(
+                request, 'You have not approved by the SAO yet, Please wait.')
+                return redirect('login')
         else:
-            messages.info(
+            messages.error(
                 request, 'The email/password you’ve entered is incorrect.')
 
     context = {}
@@ -495,47 +502,43 @@ def AddJobExperience(request):
     if request.method == 'GET':
         return render(request, 'user/JobExperience/AddExperience.html', context)
 
-# COMPANY NAME
     if request.method == 'POST':
+        # COMPANY NAME
         company_name = request.POST['company_name']
 
         if not company_name:
             messages.error(request, 'COMPANY NAME IS REQUIRED!!!')
             return render(request, 'user/JobExperience/AddExperience.html', context)
 
-# ADDRESS
-    if request.method == 'POST':
+        # ADDRESS
         address = request.POST['address']
 
         if not address:
             messages.error(request, 'ADDRESS IS REQUIRED!!!')
             return render(request, 'user/JobExperience/AddExperience.html', context)
-# POSITION
-    if request.method == 'POST':
+
+        # POSITION
         position = request.POST['position']
 
         if not position:
             messages.error(request, 'POSITION IS REQUIRED!!!')
             return render(request, 'user/JobExperience/AddExperience.html', context)
 
-# Salary
-    if request.method == 'POST':
+        # Salary
         salary = request.POST['salary']
 
         if not salary:
             messages.error(request, 'DESCRIPTION IS REQUIRED!!!')
             return render(request, 'user/JobExperience/AddExperience.html', context)
 
-# DATE STARTED
-    if request.method == 'POST':
+        # DATE STARTED
         experienceStartDate = request.POST['experienceStartDate']
 
         if not experienceStartDate:
             messages.error(request, 'DATE STARTED IS REQUIRED!!!')
             return render(request, 'user/JobExperience/AddExperience.html', context)
 
-# DATE LEAVED
-    if request.method == 'POST':
+        # DATE LEAVED
         experienceEndDate = request.POST['experienceEndDate']
 
         if not experienceEndDate:

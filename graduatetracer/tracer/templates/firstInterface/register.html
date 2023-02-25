@@ -18,6 +18,66 @@
         white-space: nowrap;
         text-align: center;
       }
+      i#show_eye {
+          float: right;
+          margin-right: 15px;
+          margin-top: 50px;
+          position: relative;
+          z-index: 2;
+          color: #6e707e;
+          cursor: pointer;
+        }
+        i#hide_eye {
+          float: right;
+          margin-right: 15px;
+          margin-top: 50px;
+          position: relative;
+          z-index: 2;
+          color: #6e707e;
+          cursor: pointer;
+        }
+
+        i#show_eyes {
+          float: right;
+          margin-right: 15px;
+          margin-top: 50px;
+          position: relative;
+          z-index: 2;
+          color: #6e707e;
+          cursor: pointer;
+        }
+        i#hide_eyes {
+          float: right;
+          margin-right: 15px;
+          margin-top: 50px;
+          position: relative;
+          z-index: 2;
+          color: #6e707e;
+          cursor: pointer;
+        }
+    
+        .eye {
+          position: absolute;
+          top: 35%;
+          right: 10px;
+          transform: translateY(-50%);
+          cursor: pointer;
+          z-index: 2;
+        }
+    
+        input#password-field {
+          font-size: 0.8rem;
+          border-radius: 10rem;
+          padding: 1.5rem 1rem;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
+        .position-relative {
+          flex: 1 1 auto;
+          width: 1%;
+          min-width: 0;
+          margin-bottom: 0;
+        }
     </style>
 </head>
  
@@ -42,82 +102,90 @@
                                     </div>
                                     <form class="user" method="POST" action="" enctype="multipart/form-data">
                                         {% csrf_token %}
-                    <div class="row g-3">
-                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
-                        <label for="inputFirstname" class="form-label" Required="first_name">First Name</label>
-                                                {{ form.first_name }}
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
-                        <label for="inputMiddlename" class="form-label" Required="middle_name">Middle Name</label>
-                        {{ form.middle_name }}
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                        <label for="inputLastname" class="form-label" Required="last_name">Last Name</label>
-                        {{ form.last_name }}
-                      </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputIDNumber" class="form-label" Required="IDNum">ID Number</label>
-                                                {{form.IDNum}}
-                      </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputEmail" class="form-label" Required="email">Email</label>
-                        {{ form.email }}
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputCourse" class="form-label" Required="course_type">Course Type</label>
-                        {{ form.course_type}}
-                      </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputSchool" class="form-label" Required="school">School</label>
- 
-                            {% render_field form.school class="form-control" onchange="School()" id="id_school" %}
- 
-                            {% render_field form.argaoCampus style="display:none;" %}
-                            {% render_field form.bariliCampus style="display:none;" %}
-                            {% render_field form.carmenCampus style="display:none;" %}
-                            {% render_field form.CCMECampus style="display:none;"%}
-                            {% render_field form.daanbantayanCampus style="display:none;"%}
-                            {% render_field form.danaoCampus style="display:none;"%}
-                            {% render_field form.dumanjugExt style="display:none;"%}
-                            {% render_field form.ginatilanExt style="display:none;"%}
-                            {% render_field form.malabuyocExt style="display:none;"%}
-                            {% render_field form.mainCampus style="display:none;"%}
-                            {% render_field form.moalboalCampus style="display:none;"%}
-                            {% render_field form.nagaExt style="display:none;"%}
-                            {% render_field form.oslobExt style="display:none;"%}
-                            {% render_field form.pinamungajanExt style="display:none;"%}
-                            {% render_field form.sanfernandoExt style="display:none;"%}
-                            {% render_field form.sanfranciscoCampus style="display:none;"%}
-                            {% render_field form.tuburanCampus style="display:none;"%}
- 
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputYear" class="form-label" Required name="date_graduated">Year Graduated</label>
-                            {{ form.date_graduated }}
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputEmployment_Status" class="form-label" Required name="employment_status">Employment Status</label>
- 
-                            {% render_field form.employment_status class="form-control" onchange="Employment_Status()" id="id_employment_status" %}
- 
-                            {% render_field form.employed style="display:none;" %}
-                            {% render_field form.unemployed style="display:none;" %}
- 
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputPassword" class="form-label" Required="password1">Password</label>
-                        {{ form.password1 }}
-                      </div>
-                      <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                        <label for="inputConfirmpass" class="form-label" Required="password2">Confirm Pasword</label>
-                        {{ form.password2 }}
-                      </div>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                        <button class="btn btn-success" role="button" aria-pressed="true" type="submit" value="Register" style="white-space: nowrap;
-        text-align: center;">Register Account</button>
-                      </div>
-                    </div>
-                  </form>
+                                      <div class="row g-3">
+                                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
+                                          <label for="inputFirstname" class="form-label" Required="first_name">First Name</label>
+                                                                  {{ form.first_name }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 input">
+                                          <label for="inputMiddlename" class="form-label" Required="middle_name">Middle Name</label>
+                                          {{ form.middle_name }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+                                          <label for="inputLastname" class="form-label" Required="last_name">Last Name</label>
+                                          {{ form.last_name }}
+                                        </div>
+                                                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputIDNumber" class="form-label" Required="IDNum">ID Number</label>
+                                                                  {{form.IDNum}}
+                                        </div>
+                                                              <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputEmail" class="form-label" Required="email">Email</label>
+                                          {{ form.email }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputCourse" class="form-label" Required="course_type">Course Type</label>
+                                          {{ form.course_type}}
+                                        </div>
+                                          <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputSchool" class="form-label" Required="school">School</label>
+                  
+                                              {% render_field form.school class="form-control" onchange="School()" id="id_school" %}
+                  
+                                              {% render_field form.argaoCampus style="display:none;" %}
+                                              {% render_field form.bariliCampus style="display:none;" %}
+                                              {% render_field form.carmenCampus style="display:none;" %}
+                                              {% render_field form.CCMECampus style="display:none;"%}
+                                              {% render_field form.daanbantayanCampus style="display:none;"%}
+                                              {% render_field form.danaoCampus style="display:none;"%}
+                                              {% render_field form.dumanjugExt style="display:none;"%}
+                                              {% render_field form.ginatilanExt style="display:none;"%}
+                                              {% render_field form.malabuyocExt style="display:none;"%}
+                                              {% render_field form.mainCampus style="display:none;"%}
+                                              {% render_field form.moalboalCampus style="display:none;"%}
+                                              {% render_field form.nagaExt style="display:none;"%}
+                                              {% render_field form.oslobExt style="display:none;"%}
+                                              {% render_field form.pinamungajanExt style="display:none;"%}
+                                              {% render_field form.sanfernandoExt style="display:none;"%}
+                                              {% render_field form.sanfranciscoCampus style="display:none;"%}
+                                              {% render_field form.tuburanCampus style="display:none;"%}
+                  
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputYear" class="form-label" Required name="date_graduated">Year Graduated</label>
+                                              {{ form.date_graduated }}
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputEmployment_Status" class="form-label" Required name="employment_status">Employment Status</label>
+                  
+                                              {% render_field form.employment_status class="form-control" onchange="Employment_Status()" id="id_employment_status" %}
+                  
+                                              {% render_field form.employed style="display:none;" %}
+                                              {% render_field form.unemployed style="display:none;" %}
+                  
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                          <label for="inputPassword" class="form-label" Required="password1">Password</label>
+                                          {{ form.password1 }}
+                                          <span class="eye" onclick="togglePasswordVisibility('id_password1', 'show_eyes', 'hide_eyes');">
+                                              <i class="fa fa-eye-slash" id="show_eyes"></i>
+                                              <i class="fa fa-eye d-none" id="hide_eyes"></i>
+                                          </span>
+                                        </div>
+                                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                                            <label for="inputConfirmpass" class="form-label" Required="password2">Confirm Password</label>
+                                            {{ form.password2 }}
+                                            <span class="eye" onclick="togglePasswordVisibility('id_password2', 'show_eye', 'hide_eye');">
+                                                <i class="fa fa-eye-slash" id="show_eye"></i>
+                                                <i class="fa fa-eye d-none" id="hide_eye"></i>
+                                            </span>
+                                        </div>
+                                        <div class="d-grid gap-2 col-6 mx-auto">
+                                          <button class="btn btn-success" role="button" aria-pressed="true" type="submit" value="Register" style="white-space: nowrap;
+                          text-align: center;">Register Account</button>
+                                        </div>
+                                      </div>
+                                    </form>
                                     {% for message in messages %}
                                     <p id="messages">{{message}}</p>
                                     {% endfor %}
@@ -137,6 +205,22 @@
         </div>
  
     </div>
+    <script>
+        function togglePasswordVisibility(passwordId, showEyeId, hideEyeId) {
+        var passwordField = document.getElementById(passwordId);
+        var showEye = document.getElementById(showEyeId);
+        var hideEye = document.getElementById(hideEyeId);
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            showEye.classList.add("d-none");
+            hideEye.classList.remove("d-none");
+        } else {
+            passwordField.type = "password";
+            showEye.classList.remove("d-none");
+            hideEye.classList.add("d-none");
+        }
+    }
+    </script>
 </body>
  
 </html>

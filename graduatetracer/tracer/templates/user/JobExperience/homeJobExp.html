@@ -97,7 +97,7 @@
             <th class="th-w-20" style="white-space: nowrap">Position</th>
             <th class="th-w-20" style="white-space: nowrap">Salary</th>
             <th class="th-w-20" style="white-space: nowrap">Date Started</th>
-            <th class="th-w-20" style="white-space: nowrap">Date Leaved</th>
+            <th class="th-w-20" style="white-space: nowrap">Ended</th>
             <th class="th-w-20 " style="white-space: nowrap">Option</th>
           </tr>
       </thead>
@@ -123,7 +123,7 @@
               <td option-table-wid>
                 <div class="row w-100 m-auto p-0">
                   <div style="width:50%;" class="text-center">
-                    <a class="dropdown-item text-info p-0" href="{% url 'edit_experience' JobExperiences.id %}"><i class="fas fa-wrench"></i></a>
+                    <a class="dropdown-item text-info p-0" href="{% url 'edit_experience' JobExperiences.id %}"><i class="fas fa-edit"></i></a>
                   </div>
                   <div style="width:50%;" class="text-center pl-0">
                     <a class="dropdown-item text-danger p-0" data-toggle="modal" data-target="#exampleModalCenter{{ JobExperiences.id }}" ><i class="fas fa-trash-alt"></i></a>

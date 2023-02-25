@@ -6,7 +6,10 @@ def unauthenticated_user(view_func):
     def wrapper_func(request, *args, **kwargs):
         if request.user.is_authenticated:
             if request.user.is_graduate:
-                return redirect('DashboardUser')
+                if request.user.approved:
+                    return redirect('DashboardUser')
+                else:
+                    return view_func(request, *args, **kwargs)
             elif request.user.is_admin_sao:
                 return redirect('saodashboard')
             elif request.user.is_system_admin:

@@ -172,17 +172,15 @@
 					<!-- <div class="col-lg-4 col-md-4 text-center">
 						<a href="{% url 'post-comment' post.id %}" class="btn btn-">
 						  <i style="font-size: 19px;" aria-hidden="true" class="fa fa-comment">
-						    {% if comment_count != 0 %}
-						    <span style="font-size: 14px"> {{ comment_count }} </span>
-						    {% endif %}
+						    <span style="font-size: 14px"> 0{{ comment_count }} </span>
 						  </i>
 						  Comment
 						</a>
-						</div> -->
+					</div> -->
 					<div class="col-12 col-lg-4 col-md-4 col-sm-12 text-center">
 						<a href="{% url 'post-comment' post.id %}" class="btn btn2">
 						<i style="font-size: 19px;" aria-hidden="true" class="fa fa-comment">
-						</i>
+						</i>{{ comment_count }}
 						Comment
 						</a>
 					</div>

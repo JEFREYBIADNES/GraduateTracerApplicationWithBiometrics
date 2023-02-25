@@ -20,6 +20,66 @@
       border-radius: 0.35rem;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+  i#show_eye {
+      float: right;
+      margin-right: 15px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 2;
+      color: #6e707e;
+      cursor: pointer;
+    }
+    i#hide_eye {
+      float: right;
+      margin-right: 15px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 2;
+      color: #6e707e;
+      cursor: pointer;
+    }
+
+    i#show_eyes {
+      float: right;
+      margin-right: 15px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 2;
+      color: #6e707e;
+      cursor: pointer;
+    }
+    i#hide_eyes {
+      float: right;
+      margin-right: 15px;
+      margin-top: 50px;
+      position: relative;
+      z-index: 2;
+      color: #6e707e;
+      cursor: pointer;
+    }
+
+    .eye {
+      position: absolute;
+      top: 35%;
+      right: 10px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    input#password-field {
+      font-size: 0.8rem;
+      border-radius: 10rem;
+      padding: 1.5rem 1rem;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    .position-relative {
+      flex: 1 1 auto;
+      width: 1%;
+      min-width: 0;
+      margin-bottom: 0;
+    }
   </style>
     <div class="card shadow mb-4">
       <div class="card-header  h3 bg-gradient-info text-white">
@@ -90,10 +150,18 @@
             <div class="col-sm-12 col-md-12 col-lg-6">
               <label for="inputPassword" class="form-label" Required="password1">Password</label>
               {% render_field adform.password1 class="form-control"%}
+              <span class="eye" onclick="togglePasswordVisibility('id_password1', 'show_eyes', 'hide_eyes');">
+                <i class="fa fa-eye-slash" id="show_eyes"></i>
+                <i class="fa fa-eye d-none" id="hide_eyes"></i>
+              </span>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6">
               <label for="inputConfirmpass" class="form-label" Required="password2">Confirm Password</label>
               {% render_field adform.password2 class="form-control"%}
+              <span class="eye" onclick="togglePasswordVisibility('id_password2', 'show_eye', 'hide_eye');">
+                <i class="fa fa-eye-slash" id="show_eye"></i>
+                <i class="fa fa-eye d-none" id="hide_eye"></i>
+            </span>
             </div>
           </div>
           <div class="row justify-content-center pt-4">
@@ -110,6 +178,23 @@
       </div>
   <!-- Sweet Alert -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    function togglePasswordVisibility(passwordId, showEyeId, hideEyeId) {
+    var passwordField = document.getElementById(passwordId);
+    var showEye = document.getElementById(showEyeId);
+    var hideEye = document.getElementById(hideEyeId);
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        showEye.classList.add("d-none");
+        hideEye.classList.remove("d-none");
+    } else {
+        passwordField.type = "password";
+        showEye.classList.remove("d-none");
+        hideEye.classList.add("d-none");
+    }
+}
+</script>
  
   <script>
     {% for message in messages %}

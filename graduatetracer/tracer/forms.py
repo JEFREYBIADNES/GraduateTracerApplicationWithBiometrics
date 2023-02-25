@@ -196,7 +196,7 @@ class RegisterForm(forms.ModelForm):
                    'email': forms.EmailInput(attrs={'class': 'form-control', 'required': 'true'}),
                    'IDNum': forms.NumberInput(attrs={'class': 'form-control', 'required': 'true'}),
                    'first_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-                   'middle_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
+                   'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
                    'last_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
                    'course_type': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
                    'school': forms.Select(attrs={'class': 'form-control','required': 'true'}),
@@ -262,7 +262,7 @@ class RegisterAdminForm(forms.ModelForm):
         widgets = {
                    'email': forms.EmailInput(attrs={'class': 'form-control', 'required': 'true'}),
                    'first_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-                   'middle_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
+                   'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
                    'last_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
                    'school': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
                    'user_type': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
@@ -350,21 +350,21 @@ class GraduateForm(forms.ModelForm):
                   'job_description',
                   'skill',)
         widgets = {
-         'IDNum': forms.NumberInput(attrs={'class': 'form-control', 'required': 'true'}),
+         'IDNum': forms.NumberInput(attrs={'class': 'form-control'}),
          'profile_picture': forms.FileInput(attrs={'class': 'form-control'}),
-         'first_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'middle_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'last_name': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date', 'required': 'true'}),
-         'age': forms.NumberInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'gender': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
-         'address': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'contact_number': forms.NumberInput(attrs={'class': 'form-control', 'required': 'true'}),
-         'date_graduated': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
-         'course_type': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
-         'school': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
-         'employment_status': forms.Select(attrs={'class': 'form-control', 'required': 'true'}),
-         'job_description': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
+         'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+         'middle_name': forms.TextInput(attrs={'class': 'form-control'}),
+         'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+         'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+         'age': forms.NumberInput(attrs={'class': 'form-control'}),
+         'gender': forms.Select(attrs={'class': 'form-control'}),
+         'address': forms.TextInput(attrs={'class': 'form-control'}),
+         'contact_number': forms.NumberInput(attrs={'class': 'form-control'}),
+         'date_graduated': forms.Select(attrs={'class': 'form-control'}),
+         'course_type': forms.Select(attrs={'class': 'form-control'}),
+         'school': forms.Select(attrs={'class': 'form-control'}),
+         'employment_status': forms.Select(attrs={'class': 'form-control'}),
+         'job_description': forms.TextInput(attrs={'class': 'form-control'}),
         #  'skill': forms.TextInput(attrs={'class': 'form-control', 'required': 'true'}),
             }
  
@@ -443,4 +443,3 @@ class ProfileForm(forms.ModelForm):
                   'last_name', 'email', 'profile_picture')
  
  
-

@@ -309,7 +309,7 @@ class User(AbstractBaseUser):
     profile_picture = models.ImageField(default="default_profile_2.png", null=True, blank=True)
     IDNum = models.PositiveIntegerField(blank=True, null=True, unique=True)
     first_name = models.CharField(max_length=200, null=True)
-    middle_name = models.CharField(max_length=200, null=True)
+    middle_name = models.CharField(max_length=200, null=True, blank=True, )
     last_name = models.CharField(max_length=200, null=True)
     birth_date = models.DateField(blank=True, null=True)
     age = models.PositiveIntegerField(blank=True, null=True)
@@ -437,7 +437,7 @@ class User(AbstractBaseUser):
     def is_pinamungajanExt(self):
         return self.pinamungajanExt
     @property
-    def is_sanfernandoExts(self):
+    def is_sanfernandoExt(self):
         return self.sanfernandoExts
     @property
     def is_sanfranciscoCampus(self):
@@ -619,7 +619,7 @@ class SystemUser(AbstractUser):
     def is_pinamungajanExt(self):
         return self.pinamungajanExt
     @property
-    def is_sanfernandoExts(self):
+    def is_sanfernandoExt(self):
         return self.sanfernandoExts
     @property
     def is_sanfranciscoCampus(self):

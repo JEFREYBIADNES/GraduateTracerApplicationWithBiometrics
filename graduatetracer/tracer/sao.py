@@ -113,19 +113,275 @@ def SaoDashboard(request):
     top_notif_jobs = Advertise.objects.all().order_by(
         '-date_created').filter(job_advertise_notif_counter=False)[:3]
 
-    count_users = User.objects.filter(approved=True).count()
-    count_employed = 0
-    count_unemployed = 0
-    count_approved = User.objects.filter(approved=True).count()
-    count_pending = 0
+    #countuser
+    argao_count_users= 0
+    barili_count_users = 0
+    carmen_count_users = 0
+    cebu_count_users = 0
+    daan_count_users = 0
+    dumanjug_count_users = 0
+    danao_count_users = 0
+    ginatilan_count_users = 0
+    malabuyoc_count_users = 0
+    main_count_users = 0
+    moalboal_count_users = 0
+    naga_count_users = 0
+    oslob_count_users = 0
+    pinamungajan_count_users = 0
+    sanfernando_count_users = 0
+    sanfrancisco_count_users = 0
+    tuburan_count_users = 0
+    # unemployed
+    argao_count_unemployed= 0
+    barili_count_unemployed = 0
+    carmen_count_unemployed = 0
+    cebu_count_unemployed = 0
+    daan_count_unemployed = 0
+    dumanjug_count_unemployed = 0
+    danao_count_unemployed = 0
+    ginatilan_count_unemployed = 0
+    malabuyoc_count_unemployed = 0
+    main_count_unemployed = 0
+    moalboal_count_unemployed = 0
+    naga_count_unemployed = 0
+    oslob_count_unemployed = 0
+    pinamungajan_count_unemployed = 0
+    sanfernando_count_unemployed = 0
+    sanfrancisco_count_unemployed = 0
+    tuburan_count_unemployed = 0
+
+    #employed
+    argao_count_employed= 0
+    barili_count_employed = 0
+    carmen_count_employed = 0
+    cebu_count_employed = 0
+    daan_count_employed = 0
+    dumanjug_count_employed = 0
+    danao_count_employed = 0
+    ginatilan_count_employed = 0
+    malabuyoc_count_employed = 0
+    main_count_employed = 0
+    moalboal_count_employed = 0
+    naga_count_employed = 0
+    oslob_count_employed = 0
+    pinamungajan_count_employed = 0
+    sanfernando_count_employed = 0
+    sanfrancisco_count_employed = 0
+    tuburan_count_employed = 0
+
+    #approved
+    argao_count_approved= 0
+    barili_count_approved = 0
+    carmen_count_approved = 0
+    cebu_count_approved = 0
+    daan_count_approved = 0
+    dumanjug_count_approved = 0
+    danao_count_approved = 0
+    ginatilan_count_approved = 0
+    malabuyoc_count_approved = 0
+    main_count_approved = 0
+    moalboal_count_approved = 0
+    naga_count_approved = 0
+    oslob_count_approved = 0
+    pinamungajan_count_approved = 0
+    sanfernando_count_approved = 0
+    sanfrancisco_count_approved = 0
+    tuburan_count_approved = 0
+
+    #pending
+    argao_count_pending= 0
+    barili_count_pending = 0
+    carmen_count_pending = 0
+    cebu_count_pending = 0
+    daan_count_pending = 0
+    dumanjug_count_pending = 0
+    danao_count_pending = 0
+    ginatilan_count_pending = 0
+    malabuyoc_count_pending = 0
+    main_count_pending = 0
+    moalboal_count_pending = 0
+    naga_count_pending = 0
+    oslob_count_pending = 0
+    pinamungajan_count_pending = 0
+    sanfernando_count_pending = 0
+    sanfrancisco_count_pending = 0
+    tuburan_count_pending = 0
+
     users = User.objects.all()
     for user in users:
+# PENDING
         if user.graduate and user.pending:
-            count_pending+=1
-        elif user.graduate and user.approved and user.employed:
-            count_employed+=1
-        elif user.graduate and user.approved and user.unemployed:
-            count_unemployed+=1
+            if user.is_argaoCampus:
+                argao_count_pending+=1
+            elif user.is_bariliCampus:
+                barili_count_pending+=1
+            elif user.is_carmenCampus:
+                carmen_count_pending+=1
+            elif user.is_CCMECampus:
+                cebu_count_pending+=1
+            elif user.is_daanbantayanCampus:
+                daan_count_pending+=1
+            elif user.is_dumanjugExt:
+                dumanjug_count_pending+=1
+            elif user.is_danaoCampus:
+                danao_count_pending+=1
+            elif user.is_ginatilanExt:
+                ginatilan_count_pending+=1
+            elif user.is_malabuyocExt:
+                malabuyoc_count_pending+=1
+            elif user.is_mainCampus:
+                main_count_pending+=1
+            elif user.is_moalboalCampus:
+                moalboal_count_pending+=1
+            elif user.is_nagaExt:
+                naga_count_pending+=1
+            elif user.is_oslobExt:
+                oslob_count_pending+=1
+            elif user.is_pinamungajanExt:
+                pinamungajan_count_pending+=1
+            elif user.is_sanfernandoExt:
+                sanfernando_count_pending+=1
+            elif user.is_sanfranciscoCampus:
+                sanfrancisco_count_pending+=1
+            elif user.is_tuburanCampus:
+                tuburan_count_pending+=1
+#cOUNT USER
+        elif user.graduate and user.approved:
+            if user.is_argaoCampus:
+                argao_count_users+=1
+                argao_count_approved+=1
+                if user.employed:
+                    argao_count_employed+=1
+                elif user.unemployed:
+                    argao_count_unemployed+=1
+                
+            elif user.is_bariliCampus:
+                barili_count_users+=1
+                barili_count_approved+=1
+                if user.employed:
+                    barili_count_employed+=1
+                elif user.unemployed:
+                    barili_count_unemployed+=1
+
+            elif user.is_carmenCampus:
+                carmen_count_users+=1
+                carmen_count_approved+=1
+                if user.employed:
+                    carmen_count_employed+=1
+                elif user.unemployed:
+                    carmen_count_unemployed+=1
+
+            elif user.is_CCMECampus:
+                cebu_count_users+=1
+                cebu_count_approved+=1
+                if user.employed:
+                    cebu_count_employed+=1
+                elif user.unemployed:
+                    cebu_count_unemployed+=1
+
+            elif user.is_daanbantayanCampus:
+                daan_count_users+=1
+                daan_count_approved+=1
+                if user.employed:
+                    daan_count_employed+=1
+                elif user.unemployed:
+                    daan_count_unemployed+=1
+
+            elif user.is_dumanjugExt:
+                dumanjug_count_users+=1
+                dumanjug_count_approved+=1
+                if user.employed:
+                    dumanjug_count_employed+=1
+                elif user.unemployed:
+                    dumanjug_count_unemployed+=1
+
+            elif user.is_danaoCampus:
+                danao_count_users+=1
+                danao_count_approved+=1
+                if user.employed:
+                    danao_count_employed+=1
+                elif user.unemployed:
+                    danao_count_unemployed+=1
+                    
+            elif user.is_ginatilanExt:
+                ginatilan_count_users+=1
+                ginatilan_count_approved+=1
+                if user.employed:
+                    ginatilan_count_employed+=1
+                elif user.unemployed:
+                    ginatilan_count_unemployed+=1
+
+            elif user.is_malabuyocExt:
+                malabuyoc_count_users+=1
+                malabuyoc_count_approved+=1
+                if user.employed:
+                    malabuyoc_count_employed+=1
+                elif user.unemployed:
+                    malabuyoc_count_unemployed+=1
+
+            elif user.is_mainCampus:
+                main_count_users+=1
+                main_count_approved+=1
+                if user.employed:
+                    main_count_employed+=1
+                elif user.unemployed:
+                    main_count_unemployed+=1
+
+            elif user.is_moalboalCampus:
+                moalboal_count_users+=1
+                moalboal_count_approved+=1
+                if user.employed:
+                    moalboal_count_employed+=1
+                elif user.unemployed:
+                    moalboal_count_unemployed+=1
+
+            elif user.is_nagaExt:
+                naga_count_users+=1
+                naga_count_approved+=1
+                if user.employed:
+                    naga_count_employed+=1
+                elif user.unemployed:
+                    naga_count_unemployed+=1
+
+            elif user.is_oslobExt:
+                oslob_count_users+=1
+                oslob_count_approved+=1
+                if user.employed:
+                    oslob_count_employed+=1
+                elif user.unemployed:
+                    oslob_count_unemployed+=1
+
+            elif user.is_pinamungajanExt:
+                pinamungajan_count_users+=1
+                pinamungajan_count_approved+=1
+                if user.employed:
+                    pinamungajan_count_employed+=1
+                elif user.unemployed:
+                    pinamungajan_count_unemployed+=1
+
+            elif user.is_sanfernandoExt:
+                sanfernando_count_users+=1
+                sanfernando_count_approved+=1
+                if user.employed:
+                    sanfernando_count_employed+=1
+                elif user.unemployed:
+                    sanfernando_count_unemployed+=1
+
+            elif user.is_sanfranciscoCampus:
+                sanfrancisco_count_users+=1
+                sanfrancisco_count_approved+=1
+                if user.employed:
+                     sanfrancisco_count_employed+=1
+                elif user.unemployed:
+                     sanfrancisco_count_unemployed+=1
+
+            elif user.is_tuburanCampus:
+                tuburan_count_users+=1
+                tuburan_count_approved+=1
+                if user.employed:
+                    tuburan_count_employed+=1
+                elif user.unemployed:
+                    tuburan_count_unemployed+=1
         
 
     count_jobs_advertised = Advertise.objects.all().count()
@@ -152,11 +408,96 @@ def SaoDashboard(request):
                 'top_notif_announcements': top_notif_announcements,
                 'top_notif_jobs': top_notif_jobs,
 
-                'count_users': count_users,
-                'count_employed': count_employed,
-                'count_unemployed': count_unemployed,
-                'count_approved': count_approved,
-                'count_pending': count_pending,
+                'argao_count_users':argao_count_users,
+                'barili_count_users':barili_count_users,
+                'carmen_count_users':carmen_count_users,
+                'cebu_count_users':cebu_count_users,
+                'daan_count_users':daan_count_users,
+                'dumanjug_count_users':dumanjug_count_users,
+                'danao_count_users':danao_count_users,
+                'ginatilan_count_users':ginatilan_count_users,
+                'malabuyoc_count_users':malabuyoc_count_users,
+                'main_count_users':main_count_users,
+                'moalboal_count_users':moalboal_count_users,
+                'naga_count_users':naga_count_users,
+                'oslob_count_users':oslob_count_users,
+                'pinamungajan_count_users':pinamungajan_count_users,
+                'sanfernando_count_users':sanfernando_count_users,
+                'sanfrancisco_count_users':sanfrancisco_count_users,
+                'tuburan_count_users':tuburan_count_users,
+
+                'argao_count_employed':argao_count_employed,
+                'barili_count_employed':barili_count_employed,
+                'carmen_count_employed':carmen_count_employed,
+                'cebu_count_employed':cebu_count_employed,
+                'daan_count_employed':daan_count_employed,
+                'dumanjug_count_employed':dumanjug_count_employed,
+                'danao_count_employed':danao_count_employed,
+                'ginatilan_count_employed':ginatilan_count_employed,
+                'malabuyoc_count_employed':malabuyoc_count_employed,
+                'main_count_employed':main_count_employed,
+                'moalboal_count_employed':moalboal_count_employed,
+                'naga_count_employed':naga_count_employed,
+                'oslob_count_employed':oslob_count_employed,
+                'pinamungajan_count_employed':pinamungajan_count_employed,
+                'sanfernando_count_employed':sanfernando_count_employed,
+                'sanfrancisco_count_employed':sanfrancisco_count_employed,
+                'tuburan_count_employed':tuburan_count_employed,
+
+                'argao_count_approved':argao_count_approved,
+                'barili_count_approved':barili_count_approved,
+                'carmen_count_approved':carmen_count_approved,
+                'cebu_count_approved':cebu_count_approved,
+                'daan_count_approved':daan_count_approved,
+                'dumanjug_count_approved':dumanjug_count_approved,
+                'danao_count_approved':danao_count_approved,
+                'ginatilan_count_approved':ginatilan_count_approved,
+                'malabuyoc_count_approved':malabuyoc_count_approved,
+                'main_count_approved':main_count_approved,
+                'moalboal_count_approved':moalboal_count_approved,
+                'naga_count_approved':naga_count_approved,
+                'oslob_count_approved':oslob_count_approved,
+                'pinamungajan_count_approved':pinamungajan_count_approved,
+                'sanfernando_count_approved':sanfernando_count_approved,
+                'sanfrancisco_count_approved':sanfrancisco_count_approved,
+                'tuburan_count_approved':tuburan_count_approved,
+
+                'argao_count_pending':argao_count_pending,
+                'barili_count_pending':barili_count_pending,
+                'carmen_count_pending':carmen_count_pending,
+                'cebu_count_pending':cebu_count_pending,
+                'daan_count_pending':daan_count_pending,
+                'dumanjug_count_pending':dumanjug_count_pending,
+                'danao_count_pending':danao_count_pending,
+                'ginatilan_count_pending':ginatilan_count_pending,
+                'malabuyoc_count_pending':malabuyoc_count_pending,
+                'main_count_pending':main_count_pending,
+                'moalboal_count_pending':moalboal_count_pending,
+                'naga_count_pending':naga_count_pending,
+                'oslob_count_pending':oslob_count_pending,
+                'pinamungajan_count_pending':pinamungajan_count_pending,
+                'sanfernando_count_pending':sanfernando_count_pending,
+                'sanfrancisco_count_pending':sanfrancisco_count_pending,
+                'tuburan_count_pending':tuburan_count_pending,
+                
+                'argao_count_unemployed':argao_count_unemployed,
+                'barili_count_unemployed':barili_count_unemployed,
+                'carmen_count_unemployed':carmen_count_unemployed,
+                'cebu_count_unemployed':cebu_count_unemployed,
+                'daan_count_unemployed':daan_count_unemployed,
+                'dumanjug_count_unemployed':dumanjug_count_unemployed,
+                'danao_count_unemployed':danao_count_unemployed,
+                'ginatilan_count_unemployed':ginatilan_count_unemployed,
+                'malabuyoc_count_unemployed':malabuyoc_count_unemployed,
+                'main_count_unemployed':main_count_unemployed,
+                'moalboal_count_unemployed':moalboal_count_unemployed,
+                'naga_count_unemployed':naga_count_unemployed,
+                'oslob_count_unemployed':oslob_count_unemployed,
+                'pinamungajan_count_unemployed':pinamungajan_count_unemployed,
+                'sanfernando_count_unemployed':sanfernando_count_unemployed,
+                'sanfrancisco_count_unemployed':sanfrancisco_count_unemployed,
+                'tuburan_count_unemployed':tuburan_count_unemployed,
+
                 'count_jobs_advertised': count_jobs_advertised,
                 'count_job_requests': count_job_requests,
 

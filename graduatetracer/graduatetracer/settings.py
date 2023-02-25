@@ -92,8 +92,8 @@ DATABASES = {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'tracer_db',
          'USER': 'root',
-         'PASSWORD': 'graduatetracer',
-         'PORT': 3307,
+         'PASSWORD': 'p@ssw0rd',
+         'PORT': 3306,
          'HOST': '127.0.0.1'
      }
  }
