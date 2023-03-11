@@ -34,6 +34,17 @@
   <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
+  <script>
+    function CurrencyConverter(amount){
+      var formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+  
+      });
+      return formatter.format(amount);
+    }
+  </script>
+  
   <style>
     .back-to-top:hover {
       background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));

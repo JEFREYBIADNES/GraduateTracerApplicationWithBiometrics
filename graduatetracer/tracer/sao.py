@@ -682,20 +682,29 @@ def ApprovedUser(request, pk):
         user.save()
         messages.success(
             request, 'Graduate Successfully Approved')
+        
+        # Send a password reset email to the user
+        reset_url = f"{request.scheme}://{request.get_host()}/login/"
+        subject = 'Approved Email'
+        message = render_to_string('firstInterface/approved_email.html', {'reset_url': reset_url})
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [user.email]
+        send_mail(subject, message, from_email,
+                  recipient_list, html_message=message)
 
-        template = render_to_string(
-                'firstInterface/emailConfirm_template.html',
-                {'name': user.first_name})
+        # template = render_to_string(
+        #         'firstInterface/emailConfirm_template.html',
+        #         {'name': user.first_name})
 
-        email = EmailMessage(
-                             'Confirm To Log In',
-                             template,
-                             settings.EMAIL_HOST_USER,
-                             [user.email],
-        )
+        # email = EmailMessage(
+        #                      'Confirm To Log In',
+        #                      template,
+        #                      settings.EMAIL_HOST_USER,
+        #                      [user.email],
+        # )
 
-        email.fail_silently = False
-        email.send()
+        # email.fail_silently = False
+        # email.send()
 
     return redirect('approvedaccounts')
 

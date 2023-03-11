@@ -138,7 +138,7 @@
                   <th class="th-w-20" style="white-space: nowrap">Position</th>
                   <th class="th-w-20" style="white-space: nowrap">Salary</th>
                   <th class="th-w-20" style="white-space: nowrap">Date Started</th>
-                  <th class="th-w-20" style="white-space: nowrap">Date Leaved</th>
+                  <th class="th-w-20" style="white-space: nowrap">Ended</th>
                 </tr>
             </thead>
             <tbody>
@@ -152,7 +152,7 @@
                       {{JobExperiences.position}}
                     </td>
                     <td class="th-w-20" style="white-space: nowrap">
-                        {{JobExperiences.salary}}
+                        <script>document.write(CurrencyConverter({{JobExperiences.salary}}))</script>
                     </td>
                     <td class="th-w-20" style="white-space: nowrap">
                       {{JobExperiences.experienceStartDate}}
