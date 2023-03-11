@@ -1303,36 +1303,44 @@ def advertise(request):
                                                     associated_users = User.objects.filter(Q(email=graduate_email_address))
                                                     if associated_users.exists():
                                                         for user in associated_users:
-                                                            subject = "Job Recommendation"
-                                                            email_template_name = "admin/email_template.html"
-                                                            email_form = {
-                                                                "email": user.email,
-                                                                'first_name': user.first_name,
-                                                                'middle_name': user.middle_name,
-                                                                'last_name': user.last_name,
-                                                                'company_name': job_sents[i].name,
-                                                                'job_title': job_sents[i].title,
-                                                                'address_1': job_sents[i].address_1,
-                                                                'job_salary': job_sents[i].salary,
-                                                                'job_category': job_sents[i].job_category,
-                                                                'job_date_created': job_sents[i].date_created,
-                                                                'domain': '127.0.0.1:8000',
-                                                                'site_name': 'CTU-Ginatilan Recommender System',
-                                                                "uid": urlsafe_base64_encode(force_bytes(user.pk)),
-                                                                "user": user,
-                                                                'token': default_token_generator.make_token(user),
-                                                                'protocol': 'http',
-                                                            }
-                                                            email = render_to_string(
-                                                                email_template_name, email_form)
-                                                            # print("Email sent to:" + email_form.email)
-                                                            try:
-                                                                send_mail(subject, email, 'admin@example.com',
-                                                                        [user.email], fail_silently=False)
-                                                            except BadHeaderError:
-                                                                return HttpResponse('Invalid header found.')
-                                                            except gaierror:
-                                                                print("error")
+                                                            reset_url = f"{request.scheme}://{request.get_host()}/browser"
+                                                            subject = 'Job Recommendation Email'
+                                                            message = render_to_string('admin/advertise_email.html', {'reset_url': reset_url})
+                                                            from_email = settings.DEFAULT_FROM_EMAIL
+                                                            recipient_list = [user.email]
+                                                            send_mail(subject, message, from_email,
+                                                                    recipient_list, html_message=message)
+                                                            
+                                                            # subject = "Job Recommendation"
+                                                            # email_template_name = "admin/advertise_email.html"
+                                                            # email_form = {
+                                                            #     "email": user.email,
+                                                            #     'first_name': user.first_name,
+                                                            #     'middle_name': user.middle_name,
+                                                            #     'last_name': user.last_name,
+                                                            #     'company_name': job_sents[i].name,
+                                                            #     'job_title': job_sents[i].title,
+                                                            #     'address_1': job_sents[i].address_1,
+                                                            #     'job_salary': job_sents[i].salary,
+                                                            #     'job_category': job_sents[i].job_category,
+                                                            #     'job_date_created': job_sents[i].date_created,
+                                                            #     'domain': '127.0.0.1:8000',
+                                                            #     'site_name': 'CTU-Ginatilan Recommender System',
+                                                            #     "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                                                            #     "user": user,
+                                                            #     'token': default_token_generator.make_token(user),
+                                                            #     'protocol': 'http',
+                                                            # }
+                                                            # email = render_to_string(
+                                                            #     email_template_name, email_form)
+                                                            # # print("Email sent to:" + email_form.email)
+                                                            # try:
+                                                            #     send_mail(subject, email, 'admin@example.com',
+                                                            #             [user.email], fail_silently=False)
+                                                            # except BadHeaderError:
+                                                            #     return HttpResponse('Invalid header found.')
+                                                            # except gaierror:
+                                                            #     print("error")
                                         
                                             grd = ""
                                             job_sent = 0
